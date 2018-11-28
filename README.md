@@ -38,7 +38,7 @@ R notebooks/codes with the implementation of each:
   + R package: glmnet
 + Support vector machines (SVM)
   + Radial Basis Function kernels (RBF)
-  + Linear kernels 
+  + Linear kernels (LK)
   + R packages: e1071, ksvm (caret), liblineaR; GPU (NVIDIA CUDA accelerated) Rgtsvm
 + Gradient boosted decision trees (XGBOOST)
   + comperehensive tuning of multiple tuning parameters
@@ -62,19 +62,40 @@ R notebooks/codes with the implementation of each:
 
 ***
 
+### Hardware requirements 
+Our scripts require (possibly highly) multicore computers with sufficient RAM. 
+
+The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (general purpose M.2 64 cores or compute optimized C.2 16 cores).
+
+Runtimes for GPU (NVIDIA CUDA accelerated) SVM classifires with RBF or LK (Rgtsvm package) were generated on NVIDIA GTX 1080Ti GPUs.
+
+
+***
+ 
+### OS & Setup requirements 
+
+We tested our R notebooks under 
++ Both CPU and GPU 
+  + Ubuntu  16.04.03 LTS
++ CPU only 
+  + Mac OS X El Capitan 10.11.6, OS X Mojave 10.14.2 
+
++ R 3.3.3 - 3.4
+
+For SVM with GPU acceleration 
+  + Setup guide for Rgtsvm see https://github.com/Danko-Lab/Rgtsvm
+  + NVIDIA CUDA 8.0, cuDNN
+  + Boost library
+
+***
+
 ### Installation guide 
 
+Package dependencies
+```sfsdfsdfdsfsgdsgfdgfdgd
+```
 
 ***
-
-### Hardware requirements 
-Our scripts require (possibly highly) multicore computers. 
-
-The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (M.2 64 cores or C.2 16 cores).
-
-
-***
-    
   
   
   
