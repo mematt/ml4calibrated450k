@@ -25,7 +25,7 @@ R notebooks/codes with the implementation of each:
 1. Nested cross validation scheme with 5-folds 
   + R package: base R
 
-### 1. Classifier:
+### 1. Machine learning classifiers:
 + Random Forests (RF) 
   + vanilla RF (using default settings)
   + tuned RF 
@@ -43,7 +43,7 @@ R notebooks/codes with the implementation of each:
 + Gradient boosted decision trees (XGBOOST)
   + comperehensive tuning of multiple tuning parameters
   + R package: xgboost, caret
-### 2. Calibration/Post-processing Algortihm:
+### 2. Calibration/Post-processing algortihms:
 + Platt scaling 
   + Logistic Regression (LR)
       + R package: glm (base R)
@@ -52,7 +52,7 @@ R notebooks/codes with the implementation of each:
 + Ridge penalized multinomial logistic regression (rpMLR/MR)
       + R package: glmnet
       
-### 3. Performance evaluation 
+### 3. Performance evaluation: 
 We also provide scripts for evaluation such as:
 + Misclassification error (ME)
 + Multiclass AUCH as published by Hand and Till (2001) 
