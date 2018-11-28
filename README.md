@@ -22,6 +22,9 @@ The data set is available in the Gene Expression Omnibus GSE109381 at https://ww
 ### Repo content
 
 R notebooks/codes with the implementation of each:
+1. Nested cross validation scheme with 5-folds 
+  + R package: base R
+
 1. Classifier:
 + Random Forests (RF) 
   + vanilla RF (using default settings)
@@ -56,9 +59,13 @@ R notebooks/codes with the implementation of each:
 + Brier score (BS)
 + Mutliclass log loss (mLL) 
   + using the Kaggle formulation https://www.kaggle.com/wiki/LogLoss.
-  
+
+***
+
 ### Installation guide 
 
+
+***
 
 ### Hardware requirements 
 Our scripts require (possibly highly) multicore computers. 
@@ -66,7 +73,7 @@ Our scripts require (possibly highly) multicore computers.
 The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (M.2 64 cores or C.2 16 cores).
 
 
-
+***
     
   
   
