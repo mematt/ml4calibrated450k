@@ -1,6 +1,6 @@
 # ml4calibrated450k
 
-### Overview 
+## Overview 
 This is a repository for comprehensive comparisons of machine learning classifiers and calibration algorithms for personalized cancer diagnostics based on DNA methylation (Illumina 450k} microarray data of molecular neuropathology.
 
 Our comaprisons included random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
@@ -19,13 +19,13 @@ The data set is available in the Gene Expression Omnibus GSE109381 at https://ww
 
 ***
 
-### Repo content
+## Repo content
 
 R notebooks/codes with the implementation of each:
 1. Nested cross validation scheme with 5-folds 
   + R package: base R
 
-1. Classifier:
+### 1. Classifier:
 + Random Forests (RF) 
   + vanilla RF (using default settings)
   + tuned RF 
@@ -43,7 +43,7 @@ R notebooks/codes with the implementation of each:
 + Gradient boosted decision trees (XGBOOST)
   + comperehensive tuning of multiple tuning parameters
   + R package: xgboost, caret
-2. Calibration/Post-processing Algortihm:
+### 2. Calibration/Post-processing Algortihm:
 + Platt scaling 
   + Logistic Regression (LR)
       + R package: glm (base R)
@@ -52,7 +52,8 @@ R notebooks/codes with the implementation of each:
 + Ridge penalized multinomial logistic regression (rpMLR/MR)
       + R package: glmnet
       
-3. We also provide scripts for performance evaluation  such as:
+### 3. Performance evaluation 
+We also provide scripts for evaluation such as:
 + Misclassification error (ME)
 + Multiclass AUCH as published by Hand and Till (2001) 
       + R package: HandTill2001
@@ -62,7 +63,7 @@ R notebooks/codes with the implementation of each:
 
 ***
 
-### Hardware requirements 
+## Hardware requirements 
 Our scripts require (possibly highly) multicore computers with sufficient RAM. 
 
 The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (general purpose M.2 64 cores or compute optimized C.2 16 cores).
@@ -72,7 +73,7 @@ Runtimes for GPU (NVIDIA CUDA accelerated) SVM classifires with RBF or LK (Rgtsv
 
 ***
  
-### OS & Setup requirements 
+## OS & Setup requirements 
 
 We tested our R notebooks under 
 + Both CPU and GPU 
@@ -89,10 +90,10 @@ For SVM with GPU acceleration
 
 ***
 
-### Installation guide 
+## Installation guide 
 
 
-1. CPU basierter setup
+### 1. CPU basierter setup
 R package dependencies 
 ```
 # CRAN
@@ -102,7 +103,7 @@ install.packages()
 
 ```
 
-2. GPU für SVM
+### 2. GPU für SVM
 NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
 Boost library for Rgtsvm http://www.boost.org/users/download/
