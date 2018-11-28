@@ -81,7 +81,7 @@ We tested our R notebooks under
 + CPU only 
   + Mac OS X El Capitan 10.11.6, OS X Mojave 10.14.2 
 
-+ R 3.3.3 - 3.4
+R 3.3.3 - 3.4
 
 For SVM with GPU acceleration 
   + Setup guide for Rgtsvm see https://github.com/Danko-Lab/Rgtsvm
