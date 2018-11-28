@@ -84,16 +84,29 @@ We tested our R notebooks under
 
 For SVM with GPU acceleration 
   + Setup guide for Rgtsvm see https://github.com/Danko-Lab/Rgtsvm
-  + NVIDIA CUDA 8.0, cuDNN
-  + Boost library
+    + NVIDIA CUDA 8.0, cuDNN
+    + Boost library http://www.boost.org/users/download/
 
 ***
 
 ### Installation guide 
 
-Package dependencies
-```sfsdfsdfdsfsgdsgfdgfdgd
+
+1. CPU basierter setup
+R package dependencies 
 ```
+# CRAN
+install.packages()
+
+# Github / devtools
+
+```
+
+2. GPU für SVM
+NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+
+Boost library for Rgtsvm http://www.boost.org/users/download/
+
 
 ***
   
