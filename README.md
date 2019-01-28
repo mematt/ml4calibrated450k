@@ -21,8 +21,8 @@ The data set is available in the Gene Expression Omnibus GSE109381 at https://ww
 
 ## Repo content
 
-R notebooks/codes with the implementation of each:
-1. Nested cross validation scheme with 5-folds 
+All algorithms were implementated and evaluated within:
+1. 5 x 5 fold nested cross validation (CV) scheme  
   + R package: base R
 
 ### 1. Machine learning classifiers:
