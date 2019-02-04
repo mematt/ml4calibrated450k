@@ -186,7 +186,7 @@ source("train_tunedRF.R")
 # This script contains the trainRF_caret_custom_tuner()
 ```
 2. This script contains:
-+ a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p<sub>varsel</sub>`.
++ a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `pvarsel` (i.e. the number of CpG probes that result in the lowest BS, LL and ME metrics).
 
 
 ```
