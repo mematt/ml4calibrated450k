@@ -77,7 +77,7 @@ Our scripts require (possibly highly) multicore computers with sufficient RAM.
 
 The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (general purpose M.2 64 cores or compute optimized C.2 16 cores).
 
-Runtimes for GPU (NVIDIA CUDA accelerated) SVM classifires with RBF or LK (Rgtsvm package) were generated on NVIDIA GTX 1080Ti GPUs.
+Runtimes for GPU (NVIDIA CUDA-accelerated) SVM classifiers with RBF or LK (`Rgtsvm` package) were generated on NVIDIA GTX 1080Ti GPUs.
 
 ***
  
