@@ -83,18 +83,18 @@ Runtimes for GPU (NVIDIA CUDA accelerated) SVM classifires with RBF or LK (Rgtsv
  
 ## OS & Setup requirements 
 
-We tested our R notebooks under 
+We tested our R scirpts under 
 + Both CPU and GPU 
   + Ubuntu  16.04.03 LTS
 + CPU only 
   + Mac OS X El Capitan 10.11.6, OS X Mojave 10.14.2 
 
-R 3.3.3 - 3.4
+R v.3.3.3 - 3.4
 
-For SVM with GPU acceleration 
-  + Setup guide for Rgtsvm see https://github.com/Danko-Lab/Rgtsvm
+For SVM with GPU acceleration (R package `Rgtsvm`) consult the setup guide at https://github.com/Danko-Lab/Rgtsvm.  
+  We used:
     + NVIDIA CUDA 8.0, cuDNN
-    + Boost library http://www.boost.org/users/download/
+    + Boost library (1.67.0), http://www.boost.org/users/download/
 
 ***
 
