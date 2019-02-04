@@ -13,10 +13,6 @@ All algorithms were compared on an uqinque data set of brain tumor DNA methylati
 *"DNA methylation-based classification of central nervous system tumours." Nature, 555, 469 ;* 
 https://www.nature.com/articles/nature26000. 
 
-> Capper, D. et al. (2018b).  
-*"Practical implementation of DNA methylation and copy-number-based CNS tumor diagnostics: the Heidelberg experience." Acta neuropathologica 136, 181-210 ;*
-https://link.springer.com/article/10.1007%2Fs00401-018-1879-y.
-
 The corresponding Github repository (https://github.com/mwsill/mnp_training) presents the implementations of the MR-calibrated RF classifier and all steps (i.e. downloading, pre-processing and filtering) required to generate the benchmarking data set (`MNPbetas10Kvar.RData`). 
 
 The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
