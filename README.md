@@ -25,8 +25,8 @@ A smaller subset of the reference DNA methylation cohort data containing only th
 
 ## Repo content
 
-All algorithms were implementated and evaluated within:
-1. 5 x 5 fold nested cross validation (CV) scheme  
+All algorithms were implementated and evaluated within:  
++ 5 x 5 fold nested cross-validation (CV) scheme  
   + R package: base R
 
 ### 1. Machine learning classifiers:
