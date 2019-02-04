@@ -60,7 +60,7 @@ All algorithms were implementated and evaluated within:
   +   + **R package**: `glmnet`
       
 ### 3. Performance evaluation: 
-We also provide scripts for evaluation such as:
+We also provide scripts for evaluation (e.g. `performance_evaluation_tRF.R`) such as:
 + Misclassification error (ME)
 + Multiclass AUCH as published by Hand and Till (2001)
   + **R package**: `HandTill2001`
