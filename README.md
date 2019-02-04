@@ -134,8 +134,6 @@ Below, we present the steps needed to perform hyperparameter tuning for the RF c
 # Load data sets 
 load("MNPbetas10Kvar.RData") 
 # contains betas data frame (2801 x 10000) and y (vector of 2801) true outcome labels
-# it is possible to download the betas1000.RData that contains betas (2801 x 1000) 
-# and y.RData that contains the y vector of true class labels (with 91 levels).
 
 # Betas1000.RData is also provided with the 1000 most variable CpG probes after unsupervised variance filtering
 load("betas1000.RData") # contains the "betas" data frame (2801 x 1000)
@@ -143,7 +141,7 @@ load("betas1000.RData") # contains the "betas" data frame (2801 x 1000)
 load("y.RData") # contains the y vector of true class labels (with 91 levels)
 
 load("nfolds.RData")
-# contains the nfolds list for nested 5 x 5-fold CV
+# contains the "nfolds" list object with the folds assignments to performed the nested 5 x 5-fold CV for internal validation
 ```
   
 ### 4. Setup and import pre-requisite R packages.
