@@ -111,6 +111,8 @@ Boost library for Rgtsvm http://www.boost.org/users/download/
 
 ***
 
+Here, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF_{BS | ME | LL} + MR) and its final performance evaluation.
+
 ### 3. Load data sets & objects
 
 ```
@@ -151,14 +153,14 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 3. nested CV 
 
 ```
-# Subfunctions to define and perform custom grid search using the caret package
+# 1. Subfunctions to define and perform custom grid search using the caret package
 source("subfunctions_tunedRF.R")
 # This script contains the funtion trainRF_caret_custom_tuner() 
 
-# Training & Hyperparameter tuning & Variable selection performed here
+# 2. Training & Hyperparameter tuning & Variable selection performed here
 source("train_tunedRF.R")
 
-# # Source scripts
+# 3. Source scripts for full evaluation of tRF in the nested CV scheme 
 source("nestedcv_tunedRF.R")
 
 # Run the function that performs the task
