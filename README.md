@@ -29,7 +29,7 @@ All algorithms were implementated and evaluated within:
 + 5 x 5 fold nested cross-validation (CV) scheme  
   + R package: base R
 
-### 1. Machine learning classifiers:
+### 1. Machine learning (ML) classifiers:
 + Random Forests (RF) 
   + vanilla RF (using default settings; vRF)
   + tuned RF (tRF)
@@ -175,7 +175,7 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 source("subfunctions_tunedRF.R")
 
 ```
-1. This script contains 
+1. This script contains: 
 + the `rfp()` function that provides a parallelized wrapper for the `randomForest()`function.
 + `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`  
 + `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
@@ -185,7 +185,7 @@ source("subfunctions_tunedRF.R")
 source("train_tunedRF.R")
 # This script contains the trainRF_caret_custom_tuner()
 ```
-2. This script contains
+2. This script contains:
 + a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p</sub>varsel</sub>`.
 
 
@@ -209,7 +209,7 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
                      )
 
 ```
-3. This script contains 
+3. This script contains: 
 + the funtion `run_nestedcv_tunedRF()` that integrates the (1.) sub- and (2.) training functions to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
 + It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively. 
 
