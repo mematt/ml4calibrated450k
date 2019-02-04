@@ -1,21 +1,21 @@
 # ml4calibrated450k
 
 ## Overview 
-This is a companion repository for the article *Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data* submitted to Nature Protocols.
+This is a companion repository for the article *"Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data"* submitted to Nature Protocols.
 
-Our comaprisons included random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
+Our comaprisons included four well-established machine learning algorithms: random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
 
 For calibration we used i) Platt scaling implemented by logistic regression (LR), Firth's penalized LR; and ii) ridge penalized multinomial regression (MR). 
 
 All algorithms were compared on an uqinque data set of brain tumor DNA methylation reference cohort (n=2801 cases belonging to 91 classes) published in:
 
 Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a). 
-DNA methylation-based classification of central nervous system tumours. Nature, 555, 469. 
+"DNA methylation-based classification of central nervous system tumours. Nature, 555, 469." 
 https://www.nature.com/articles/nature26000
 
 The corresponding Github repository using a MR calibrated RF classifier and pre-processing steps is available at https://github.com/mwsill/mnp_training. 
 
-The reference cohort set is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
+The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
 
 The benchmarking data set based on the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training). 
 A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y` is also directly downloadable from here. 
