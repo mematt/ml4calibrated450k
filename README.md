@@ -46,13 +46,14 @@ All algorithms were implementated and evaluated within:
 + Gradient boosted decision trees (XGBOOST)
   + comperehensive tuning of multiple tuning parameters
   + R package: xgboost, caret
+  
 ### 2. Calibration/Post-processing algortihms:
 + Platt scaling 
   + Logistic Regression (LR)
       + R package: glm (base R)
   + Firth's penalized LR (FLR) 
       + R package: brglm 
-+ Ridge penalized multinomial logistic regression (rpMLR/MR)
++ Ridge penalized multinomial logistic regression (MR)  
       + R package: glmnet
       
 ### 3. Performance evaluation: 
