@@ -14,16 +14,16 @@ for(i in 1:length(nfolds)){
   scorel[[i]] <- scores
 }
 
-# Collapse the lists into a large
-scores <- do.call(rbind, scorel)    ## rows: patients ; columns: classes (identical to levels of y see line 26, y <- anno$V5)  values scores  # dim(scores) 2801   91
-probs <- do.call(rbind, probl)      ## rows: patients ; columns: classes (identical to levels of y see line 26, y <- anno$V5)  values probs   # dim(probs)  2801   91
+# Collapse the lists into a large matrix
+scores <- do.call(rbind, scorel)    ## rows: patients ; columns: classes (identical to levels of y see line 26, y)  values scores  # dim(scores) 2801   91
+probs <- do.call(rbind, probl)      ## rows: patients ; columns: classes (identical to levels of y see line 26, y)  values probs   # dim(probs)  2801   91
 
 # Match rownames of scores and probs to the original betas data.frame so the order of the cases is the same as in the outcome factor (y=anno$V5) ; columns stay unchanged (same as the order of levels of y)
 scores <- scores[match(rownames(betas), rownames(scores)), ]
 probs <- probs[match(rownames(betas), rownames(probs)), ]
 
-# Outcome factor (vector of length 2801 i.e. the number of patients in the cohort)
-y <- anno$V5
+# (True) Outcome factor (vector of length 2801 i.e. the number of patients in the cohort)
+y <- load("y.RData")
 levels(y) # 91 possible diagnostic classes
 
 # Y predicted (outcome labels based on the highest score without thresholding)
