@@ -35,37 +35,39 @@ All algorithms were implementated and evaluated within:
      + Brier score (BS)
      + Misclassification error (ME)
      + Multiclass log loss (LL)
-  + R package: `randomForest`, `caret`
+  + **R package(s)**: `randomForest`, `caret`
 + Elastic net penalized multinomial logistic regression (ELNET) 
   + concurrent tuning of alpha and lambda 
-  + R package: `glmnet`
+  + **R package(s)**: `glmnet`
 + Support vector machines (SVM)
   + Radial Basis Function kernels (RBF)
   + Linear kernels (LK)
-  + R packages: `e1071`, `ksvm` (`caret`), `LiblineaR`; GPU (NVIDIA CUDA accelerated) `Rgtsvm`
+  + **R package(s)**: 
+    + CPU: `e1071`, `ksvm` (`caret`), `LiblineaR`; 
+    + GPU (NVIDIA CUDA-accelerated) `Rgtsvm`
 + Gradient boosted decision trees (XGBOOST)
   + comperehensive tuning of multiple tuning parameters
-  + R package: `xgboost`, `caret`
+  + **R package(s)**: `xgboost`, `caret`
   
 ### 2. Calibration/Post-processing algortihms:
 + Platt scaling 
   + Logistic Regression (LR)
-      + R package: `glm` (base R function)
+      + **R package**: `glm` (base R function)
   + Firth's penalized LR (FLR) 
-      + R package: `brglm` 
+      + **R package**: `brglm` 
 + Ridge penalized multinomial logistic regression (MR)  
-  +   + R package: `glmnet`
+  +   + **R package**: `glmnet`
       
 ### 3. Performance evaluation: 
 We also provide scripts for evaluation such as:
 + Misclassification error (ME)
 + Multiclass AUCH as published by Hand and Till (2001)
-  + R package: `HandTill2001`
+  + **R package**: `HandTill2001`
 + Brier score (BS) 
-  + R script: `brier.R`
+  + **R script**: `brier.R`
 + Mutliclass log loss (LL) 
   + using the Kaggle formulation https://web.archive.org/web/20160316134526/https://www.kaggle.com/wiki/MultiClassLogLoss.
-  + R script: `mlogloss.R`
+  + **R script**: `mlogloss.R`
 
 ***
 
