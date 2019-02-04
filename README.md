@@ -97,7 +97,7 @@ For SVM with GPU acceleration
 
 
 ### 1. CPU-based implementations
-Please install the R packages dependencies (see above)
+Please make sure that the required R packages (listed above) and their dependencies are installed.
 ```
 # CRAN
 install.packages("foo", dependencies=T)
