@@ -10,7 +10,7 @@ For calibration we used i) Platt scaling implemented by logistic regression (LR)
 All algorithms were compared on an uqinque data set of brain tumor DNA methylation reference cohort (n=2801 cases belonging to 91 classes) published in:
 
 Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a). 
-"DNA methylation-based classification of central nervous system tumours. Nature, 555, 469." 
+*"DNA methylation-based classification of central nervous system tumours. Nature, 555, 469."* 
 https://www.nature.com/articles/nature26000
 
 The corresponding Github repository using a MR calibrated RF classifier and pre-processing steps is available at https://github.com/mwsill/mnp_training. 
