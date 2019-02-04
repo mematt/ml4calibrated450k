@@ -17,7 +17,7 @@ The corresponding Github repository using a MR calibrated RF classifier and pre-
 
 The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
 
-The benchmarking data set based on the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training). 
+The benchmarking data set based on the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training).   
 A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y` is also directly downloadable from here. 
 
 ***
