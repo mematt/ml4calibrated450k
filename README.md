@@ -59,8 +59,8 @@ All algorithms were implementated and evaluated within:
 ### 3. Performance evaluation: 
 We also provide scripts for evaluation such as:
 + Misclassification error (ME)
-+ Multiclass AUCH as published by Hand and Till (2001) 
-      + R package: HandTill2001
++ Multiclass AUCH as published by Hand and Till (2001)
+  + R package: HandTill2001
 + Brier score (BS)
 + Mutliclass log loss (mLL) 
   + using the Kaggle formulation https://web.archive.org/web/20160316134526/https://www.kaggle.com/wiki/MultiClassLogLoss.
