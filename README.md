@@ -103,13 +103,16 @@ For SVM with GPU acceleration
 
 ### 1. CPU-based implementations
 Please make sure that the required R packages (listed above) and their dependencies are installed.
+In order to directly install packages from GitHub install the `devtools` package and use the `install_github()` function.
+
 ```
 # CRAN
 install.packages("foo", dependencies=T)
 
-# Github / devtools - to directly install packages from Github
-install_github()
-
+# Install the devtools package to directly install packages from Github
+install.packages("devtools")
+# The corresponding function 
+install_github("DeveloperName/PackageName")
 ```
 
 ### 2. GPU-accelerated SVM
