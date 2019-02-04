@@ -5,20 +5,20 @@ This is a repository for comprehensive comparisons of machine learning classifie
 
 Our comaprisons included random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
 
-For calibration we used i) Platt scaling implemented by logistic regression (LR), Firth's penalized LR; and ii) ridge penalized multinomial regression (rpMLR/MR). 
+For calibration we used i) Platt scaling implemented by logistic regression (LR), Firth's penalized LR; and ii) ridge penalized multinomial regression (MR). 
 
-All algorithms were compared on a molecular neuropathology data set of  brain tumors (n=2801 cases belonging to 91 classes) published in:
+All algorithms were compared on an uqinque data set of brain tumor DNA methylation reference cohort (n=2801 cases belonging to 91 classes) published in:
 
 Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a). 
-Dna methylation-based classification of central nervous system tumours. Nature, 555, 469. 
+DNA methylation-based classification of central nervous system tumours. Nature, 555, 469. 
 https://www.nature.com/articles/nature26000
 
-The corresponding Github repository using an rpMLR/MR calibrated RF classifier is available at https://github.com/mwsill/mnp_training
+The corresponding Github repository using a MR calibrated RF classifier and pre-processing steps is available at https://github.com/mwsill/mnp_training. 
 
-The data set is available in the Gene Expression Omnibus GSE109381 at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381
+The reference cohort set is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
 
-The benchmarking data set containing the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training). 
-A smaller subset of the data set containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y` is also directly downloadable from this repository. 
+The benchmarking data set based on the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training). 
+A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y` is also directly downloadable from here. 
 
 ***
 
@@ -63,7 +63,7 @@ We also provide scripts for evaluation such as:
       + R package: HandTill2001
 + Brier score (BS)
 + Mutliclass log loss (mLL) 
-  + using the Kaggle formulation https://www.kaggle.com/wiki/LogLoss.
+  + using the Kaggle formulation https://web.archive.org/web/20160316134526/https://www.kaggle.com/wiki/MultiClassLogLoss.
 
 ***
 
@@ -73,7 +73,6 @@ Our scripts require (possibly highly) multicore computers with sufficient RAM.
 The given runtimes were generated using either a workstation with specs of 64 GB RAM, Intel i7 6850k CPU (6 cores/12 thread @ 3.6 GHz) or AWS instances (general purpose M.2 64 cores or compute optimized C.2 16 cores).
 
 Runtimes for GPU (NVIDIA CUDA accelerated) SVM classifires with RBF or LK (Rgtsvm package) were generated on NVIDIA GTX 1080Ti GPUs.
-
 
 ***
  
