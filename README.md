@@ -173,7 +173,6 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 ```
 # 1. Subfunctions to define and perform custom grid search using the caret package
 source("subfunctions_tunedRF.R")
-
 ```
 1. This script contains: 
 + the `rfp()` function that provides a parallelized wrapper for the `randomForest()`function.
@@ -207,7 +206,6 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
                      nodesize.proc = c(0.01, 0.05, 0.1), #(3)
                      p.n.pred.var = c(100, 500, 1000, 10000)
                      )
-
 ```
 3. This script contains: 
 + the funtion `run_nestedcv_tunedRF()` that integrates the (1.) sub- and (2.) training functions to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
