@@ -27,11 +27,11 @@ All algorithms were implementated and evaluated within:
 
 ### 1. Machine learning classifiers:
 + Random Forests (RF) 
-  + vanilla RF (using default settings)
-  + tuned RF 
-     + Brier score 
-     + Misclassification error
-     + Multiclass log loss 
+  + vanilla RF (using default settings; vRF)
+  + tuned RF (tRF)
+     + Brier score (BS)
+     + Misclassification error (ME)
+     + Multiclass log loss (LL)
   + R package: randomForest, caret
 + Elastic net penalized multinomial logistic regression (ELNET) 
   + concurrent tuning of alpha and lambda 
@@ -94,25 +94,109 @@ For SVM with GPU acceleration
 
 
 ### 1. CPU basierter setup
-R package dependencies 
+R package dependencies (see above)
 ```
 # CRAN
-install.packages()
+install.packages("foo", dependencies=T)
 
-# Github / devtools
+# Github / devtools - to directly install packages from Github
+install_github()
 
 ```
 
 ### 2. GPU für SVM
 NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
-
 Boost library for Rgtsvm http://www.boost.org/users/download/
 
 
 ***
-  
-  
-  
-  
 
+### 3. Load data sets & objects
+
+```
+# Load data sets 
+load("MNPbetas10Kvar.RData") 
+# contains betas matrix (2801 x 10000) and y (vector of 2801) true outcome labels
+
+# Betas1000.RData is also provided with the 1000 most variable CpG probes after unsupervised variance filtering
+load("betas1000.RData")
+# True outcome labels y
+load("y.RData")
+
+load("nfolds.RData")
+# contains the nfolds list for nested 5 x 5-fold CV
+```
+  
+### 4. Setup and import pre-requisite R packages.
+
+```
+# Parallel backend
+library(parallel) 
+library(doParallel)
+# Random Forests classifier
+library(randomForest)
+# Caret framework for tuning randomForest hyperparameters
+library(caret)
+
+# Define number of cores for the parallel backend
+# Consider leaving 1 thread for the operating system.
+cores <- detectCores()-1 
+```
+
+### 5. Source R.scripts necessary for tuning and fitting the RF classifier
+
+We use a 3-layered approach for each ML-classifier algorithm including: 
+1. subfunctions 
+2. training functions and finally the 
+3. nested CV 
+
+```
+# Subfunctions to define and perform custom grid search using the caret package
+source("subfunctions_tunedRF.R")
+# This script contains the funtion trainRF_caret_custom_tuner() 
+
+# Training & Hyperparameter tuning & Variable selection performed here
+source("train_tunedRF.R")
+
+# # Source scripts
+source("nestedcv_tunedRF.R")
+
+# Run the function that performs the task
+run_nestedcv_tunedRF(y.. = y, betas.. = betas, 
+                     n.cv.folds = 5, 
+                     nfolds.. = nfolds,
+               # nfolds is imported via the load("nfolds.RData")
+                     cores = 10, 
+                     seed = 1234, 
+                     K.start = 1, k.start = 0,
+                     out.path = "tRF/", out.fname = "CVfold", # (1)
+                     mtry.min = NULL, mtry.max = NULL, length.mtry = 2, # (2)
+                     ntrees.min = 1000, ntrees.max = 2000, ntree.by = 500,
+                     nodesize.proc = c(0.01, 0.05, 0.1), #(3)
+                     p.n.pred.var = c(100, 500, 1000, 10000)
+                     )
+
+```
+
+### 5. Perform calibration using ridge penalized  multinomial logistic regression (MR)
+
+```
+# Source the script
+source("calibration_tRF.R")
+```
+
+### 6.	Performance evaluation
+
+Use a comprehensive panel of performance metrics: 
++ For Discrimination - derived from the ROC plot: 
+  + misclassification error (ME)
+  + multiclass AUC (mAUC) 
++ Overall prediction performance - strictly proper scoring rules for evaluating the difference between observed class and predicted class probabilities: 
+  + Brier score (BS)
+  + multiclass log loss (LL)
+
+```
+# Source the script for complete performance evaluation of tRF
+source("performance_evaluation_tRF.R")
+```
 
