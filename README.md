@@ -111,7 +111,9 @@ Boost library for Rgtsvm http://www.boost.org/users/download/
 
 ***
 
-Here, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF_{BS | ME | LL} + MR) and its final performance evaluation.
+### Example to perform hyperparameter tuning for the random forests algorithm
+
+Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF_{BS | ME | LL} + MR) and its final performance evaluation.
 
 ### 3. Load data sets & objects
 
