@@ -89,12 +89,13 @@ We tested our R scirpts under
 + CPU only 
   + Mac OS X El Capitan 10.11.6, OS X Mojave 10.14.2 
 
-R v.3.3.3 - 3.4
+R: A Language and Environment for Statistical Computing, v.3.3.3 - 3.4
 
-For SVM with GPU acceleration (R package `Rgtsvm`) consult the setup guide at https://github.com/Danko-Lab/Rgtsvm.  
+For SVM with GPU acceleration (R package `Rgtsvm`) consult the setup guide at https://github.com/Danko-Lab/Rgtsvm. 
+
 For `Rgtsvm` we used:  
-    + NVIDIA CUDA 8.0, cuDNN  
-    + Boost library (1.67.0), http://www.boost.org/users/download/
++ NVIDIA CUDA 8.0, cuDNN  
++ Boost library (v.1.67.0) ; http://www.boost.org/users/download/.
 
 ***
 
@@ -185,7 +186,7 @@ source("train_tunedRF.R")
 # This script contains the trainRF_caret_custom_tuner()
 ```
 2. This script contains:
-+ a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p</sub>varsel</sub>`.
++ a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p<sub>varsel</sub>`.
 
 
 ```
