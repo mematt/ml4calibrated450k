@@ -113,8 +113,8 @@ install_github()
 ```
 
 ### 2. GPU-accelerated SVM
-For NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
-For Boost library required for the Rgtsvm package see the user guide at http://www.boost.org/users/download/
+For NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html.  
+For Boost library required for the Rgtsvm package see the user guide at http://www.boost.org/users/download/.  
 
 
 ***
