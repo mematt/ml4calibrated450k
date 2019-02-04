@@ -11,15 +11,19 @@ All algorithms were compared on an uqinque data set of brain tumor DNA methylati
 
 > Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a). 
 *"DNA methylation-based classification of central nervous system tumours." Nature, 555, 469 ;* 
-https://www.nature.com/articles/nature26000
+https://www.nature.com/articles/nature26000. 
 
-The corresponding Github repository using a MR calibrated RF classifier and pre-processing steps is available at https://github.com/mwsill/mnp_training. 
+> Capper, D. et al. (2018b).  
+*"Practical implementation of DNA methylation and copy-number-based CNS tumor diagnostics: the Heidelberg experience." Acta neuropathologica 136, 181-210 ;*
+https://link.springer.com/article/10.1007%2Fs00401-018-1879-y.
+
+The corresponding Github repository (https://github.com/mwsill/mnp_training) presents the implementations of the MR-calibrated RF classifier and all steps (i.e. downloading, pre-processing and filtering) required to generate the benchmarking data set (`MNPbetas10Kvar.RData`). 
 
 The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
 
-The benchmarking data set based on the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training).   
+The benchmarking data set was based on the 10,000 most variable CpG probes and it can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training).   
 
-A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y.RData` is also directly downloadable from here. 
+A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download in this repository. The true class label vector `y.RData` is also directly downloadable from here. 
 
 ***
 
