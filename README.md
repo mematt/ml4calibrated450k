@@ -38,7 +38,7 @@ All algorithms were implementated and evaluated within:
   + R package: `randomForest`, `caret`
 + Elastic net penalized multinomial logistic regression (ELNET) 
   + concurrent tuning of alpha and lambda 
-  + R package: `glmnet
+  + R package: `glmnet`
 + Support vector machines (SVM)
   + Radial Basis Function kernels (RBF)
   + Linear kernels (LK)
