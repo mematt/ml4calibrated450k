@@ -92,8 +92,8 @@ We tested our R scirpts under
 R v.3.3.3 - 3.4
 
 For SVM with GPU acceleration (R package `Rgtsvm`) consult the setup guide at https://github.com/Danko-Lab/Rgtsvm.  
-  We used:
-    + NVIDIA CUDA 8.0, cuDNN
+For `Rgtsvm` we used:  
+    + NVIDIA CUDA 8.0, cuDNN  
     + Boost library (1.67.0), http://www.boost.org/users/download/
 
 ***
