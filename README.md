@@ -53,7 +53,7 @@ All algorithms were implementated and evaluated within:
       + R package: glm (base R)
   + Firth's penalized LR (FLR) 
       + R package: brglm 
-+ Ridge penalized multinomial logistic regression (MR)
++ Ridge penalized multinomial logistic regression (MR)  
       + R package: glmnet
       
 ### 3. Performance evaluation: 
