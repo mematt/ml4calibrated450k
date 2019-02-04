@@ -1,7 +1,7 @@
 # ml4calibrated450k
 
 ## Overview 
-This is a companion repository for the article *"Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data"* submitted to Nature Protocols.
+This is a companion repository for the article *"Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data"* submitted to Nature Protocols (https://www.nature.com/nprot/).
 
 Our comaprisons included four well-established machine learning algorithms: random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
 
@@ -124,7 +124,9 @@ For Boost library required for the Rgtsvm package see the user guide at http://w
 
 ## A worked example to perform hyperparameter tuning for the random forests (tRF) algorithm and post-processing it with multinomial ridge regression (MR) 
 
-Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.
+Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.  
+
+*Codes for the remaining ML-classifiers and calibration algorithms will be uploaded when the review process is finished.*
 
 ### 3. Load data sets & objects
 
