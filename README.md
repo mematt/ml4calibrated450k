@@ -13,9 +13,12 @@ Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a).
 Dna methylation-based classification of central nervous system tumours. Nature, 555, 469. 
 https://www.nature.com/articles/nature26000
 
-The corresponding Github repository using an rpMLR calibrated RF classifier is available at https://github.com/mwsill/mnp_training
+The corresponding Github repository using an rpMLR/MR calibrated RF classifier is available at https://github.com/mwsill/mnp_training
 
 The data set is available in the Gene Expression Omnibus GSE109381 at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381
+
+The benchmarking data set containing the 10,000 most variable CpG probes can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training). 
+A smaller subset of the data set containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download at this repository. The true class label vector `y` is also directly downloadable from this repository. 
 
 ***
 
@@ -93,8 +96,8 @@ For SVM with GPU acceleration
 ## Installation guide 
 
 
-### 1. CPU basierter setup
-R package dependencies (see above)
+### 1. CPU-based implementations
+Please install the R packages dependencies (see above)
 ```
 # CRAN
 install.packages("foo", dependencies=T)
@@ -104,9 +107,9 @@ install_github()
 
 ```
 
-### 2. GPU für SVM
-NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
-Boost library for Rgtsvm http://www.boost.org/users/download/
+### 2. GPU-accelerated SVM
+For NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+For Boost library required for the Rgtsvm package see the user guide at http://www.boost.org/users/download/
 
 
 ***
