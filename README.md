@@ -118,7 +118,7 @@ For Boost library required for the Rgtsvm package see the user guide at http://w
 
 ***
 
-### Example to perform hyperparameter tuning for the random forests algorithm
+## A worked example to perform hyperparameter tuning for the random forests (tRF) algorithm and post-processing it with multinomial ridge regression (MR) 
 
 Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.
 
