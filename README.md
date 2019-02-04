@@ -135,13 +135,16 @@ Below, we present the steps needed to perform hyperparameter tuning for the RF c
 load("MNPbetas10Kvar.RData") 
 # contains betas data frame (2801 x 10000) and y (vector of 2801) true outcome labels
 
-# Betas1000.RData is also provided with the 1000 most variable CpG probes after unsupervised variance filtering
+# Betas1000.RData is provided with the 1000 most variable CpG probes after unsupervised variance filtering
 load("betas1000.RData") # contains the "betas" data frame (2801 x 1000)
+
 # True outcome labels y
 load("y.RData") # contains the y vector of true class labels (with 91 levels)
 
+# Nested resampling scheme 
 load("nfolds.RData")
-# contains the "nfolds" list object with the folds assignments to performed the nested 5 x 5-fold CV for internal validation
+# contains the "nfolds" list object with the folds assignments to perform 
+# the nested 5 x 5-fold CV for internal validation
 ```
   
 ### 4. Setup and import pre-requisite R packages.
@@ -172,7 +175,7 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 source("subfunctions_tunedRF.R")
 
 ```
-This script contains 
+1. This script contains 
 + the `rfp()` function that provides a parallelized wrapper for the `randomForest()`function.
 + `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`  
 + `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
@@ -182,7 +185,7 @@ This script contains
 source("train_tunedRF.R")
 # This script contains the trainRF_caret_custom_tuner()
 ```
-This script contains
+2. This script contains
 + a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p</sub>varsel</sub>`.
 
 
@@ -194,7 +197,7 @@ source("nestedcv_tunedRF.R")
 run_nestedcv_tunedRF(y.. = y, betas.. = betas, 
                      n.cv.folds = 5, 
                      nfolds.. = nfolds,
-               # nfolds is imported via the load("nfolds.RData")
+                     # nfolds is imported via the load("nfolds.RData")
                      cores = 10, 
                      seed = 1234, 
                      K.start = 1, k.start = 0,
@@ -206,6 +209,9 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
                      )
 
 ```
+3. This script contains 
++ the funtion `run_nestedcv_tunedRF()` that integrates the (1.) sub- and (2.) training functions to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
++ It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively. 
 
 ### 5. Perform calibration using ridge penalized  multinomial logistic regression (MR)
 
