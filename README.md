@@ -170,11 +170,23 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 ```
 # 1. Subfunctions to define and perform custom grid search using the caret package
 source("subfunctions_tunedRF.R")
-# This script contains the funtion trainRF_caret_custom_tuner() 
 
+```
+This script contains 
++ the `rfp()` function that provides a parallelized wrapper for the `randomForest()`function.
++ `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`  
++ `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
+
+```
 # 2. Training & Hyperparameter tuning & Variable selection performed here
 source("train_tunedRF.R")
+# This script contains the trainRF_caret_custom_tuner()
+```
+This script contains
++ a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `p</sub>varsel</sub>`.
 
+
+```
 # 3. Source scripts for full evaluation of tRF in the nested CV scheme 
 source("nestedcv_tunedRF.R")
 
