@@ -117,7 +117,7 @@ Below, we present the steps needed to perform hyperparameter tuning for the RF c
 
 ### 3. Load data sets & objects
 
-```
+```{r}
 # Load data sets 
 load("MNPbetas10Kvar.RData") 
 # contains betas matrix (2801 x 10000) and y (vector of 2801) true outcome labels
