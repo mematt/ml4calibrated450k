@@ -1,7 +1,7 @@
 # ml4calibrated450k
 
 ## Overview 
-This is a repository for comprehensive comparisons of machine learning classifiers and calibration algorithms for personalized cancer diagnostics based on DNA methylation (Illumina 450k} microarray data of molecular neuropathology.
+This is a companion repository for the study *Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data* submitted to Nature Protocols.
 
 Our comaprisons included random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
 
@@ -53,7 +53,7 @@ All algorithms were implementated and evaluated within:
       + R package: glm (base R)
   + Firth's penalized LR (FLR) 
       + R package: brglm 
-+ Ridge penalized multinomial logistic regression (MR)  
++ Ridge penalized multinomial logistic regression (MR)
       + R package: glmnet
       
 ### 3. Performance evaluation: 
@@ -116,8 +116,7 @@ For Boost library required for the Rgtsvm package see the user guide at http://w
 
 ### Example to perform hyperparameter tuning for the random forests algorithm
 
-Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF
-<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.
+Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.
 
 ### 3. Load data sets & objects
 
