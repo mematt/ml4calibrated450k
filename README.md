@@ -29,7 +29,7 @@ This repository focuses on the internal validation and benchmarking of the combi
 
 All algorithms were implementated and evaluated within:  
 + 5 x 5 fold nested cross-validation (CV) scheme  
-  + R package: base R
+  + **R package**: base R
 
 ### 1. Machine learning (ML) classifiers:
 + Random Forests (RF) 
