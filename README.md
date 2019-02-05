@@ -120,7 +120,7 @@ install_github("DeveloperName/PackageName")
 
 ### 2. GPU-accelerated SVM
 For NVIDIA CUDA installation see detailed guide at https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html.  
-For Boost library required for the Rgtsvm package see the user guide at http://www.boost.org/users/download/.  
+For Boost library, which is required for the `Rgtsvm` package see the user guide at http://www.boost.org/users/download/.  
 
 
 ***
@@ -178,7 +178,7 @@ We use a 3-layered approach for each ML-classifier algorithm including:
 source("subfunctions_tunedRF.R")
 ```
 1. This script contains: 
-+ the `rfp()` function that provides a parallelized wrapper for the `randomForest()`function.
++ the `rfp()` function that provides a parallelized wrapper for the `randomForest::randomForest()`function.
 + `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`  
 + `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
 
