@@ -227,7 +227,7 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 + `rfcv.tuned`: the output object of the (2.) `trainRF_caret_custom_tuner()` function 
 +	`fold`: the corresponding *"K.k"* (sub)fold assignments with training and test/calibration sets  
 
-*CRITICAL/Troubleshooting: the output `CVfold.K.k.RData` file can be quite large (1-1.5Gb) because it contains multiple large matrix objects (ca. 215 MB each). Hence, saving all objects of the 5 x 5-fold nested CV scheme might require 30-50Gb free space on the hard drive.*
+*CRITICAL/Troubleshooting: the output `CVfold.K.k.RData` file can be quite large (1-1.5Gb) because it contains multiple large matrix objects (ca. 215 MB each). Hence, saving all `RData` files of the 5 x 5-fold nested CV scheme (altogether 30x) might require 30-50Gb free space on the hard drive.*
 
 ### 5. Perform calibration using ridge penalized  multinomial logistic regression (MR)
 
