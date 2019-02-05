@@ -79,9 +79,9 @@ betas.mtx <- as.matrix(betas)
 
 run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # load("nfolds.RData")
                                  cores = 10, seed = 1234, K.start = 1, k.start = 0, out.path = "tRF/", out.fname = "CVfold", 
-                                 mtry.min = NULL, mtry.max = NULL, length.mtry = 2, # If mtry.min and mtry.max arguments are left at default (NULL). The function equally divides floor(sqrt(ncol(betas)))*0.5) and floor(sqrt(ncol(betas))) to length.mtry parts 
+                                 mtry.min = NULL, mtry.max = NULL, length.mtry = 2, # If mtry.min and mtry.max arguments are left at default (NULL). The function equally divides floor(sqrt(ncol(betas)))*0.5) and floor(sqrt(ncol(betas))) to length.mtry parts, see comment #(2) by the function call below
                                  ntrees.min = 500, ntrees.max = 2000, ntree.by = 500,
-                                 nodesize.proc = c(0.01, 0.05, 0.1), # CRITICAL/Troubleshooting: The argument nodesize.proc requires three elements and adds the default values nodesize = 1 for classification and nodesize = 5 for regression in the subfunc_rf_caret_tuner_customRF()
+                                 nodesize.proc = c(0.01, 0.05, 0.1), # CRITICAL/Troubleshooting: The argument nodesize.proc requires three elements and adds the default values nodesize = 1 for classification and nodesize = 5 for regression in the subfunc_rf_caret_tuner_customRF(), see comment #(3) by the function call below
                                  n.cv = 5, n.rep = 1,
                                  p.n.pred.var = c(100, 500, 1000, 10000)){
   
@@ -160,13 +160,31 @@ run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # 
 
 #########################################################################################################################################################################################################    
 
-# Testrun 
-#Sys.time()
-#run_nestedcv_tunedRF(y.. = y, betas.. = betas100, n.cv.folds = 5, #nfolds.. = nfolds,
+# Fast testrun - ca. 20-25mins
+# Sys.time()
+# run_nestedcv_tunedRF(y.. = y, betas.. = betas100, n.cv.folds = 5, #nfolds.. = nfolds,
 #                     cores = 11, seed = 1234, 
 #                     K.start = 1, k.start = 0, 
 #                     mtry.min = 50, mtry.max = 100, 
 #                     length.mtry = 2, p.n.pred.var = c(50, 100)))
-#Sys.time()
+# Sys.time()
 
- 
+
+
+# Timing: for outerfolds ~4 – 4.5-h ; for the full 5 x 5-fold nested CV scheme 4 – 5 days depending on the tuning grid size.
+
+# Run the function as presented in the Read.md
+# run_nestedcv_tunedRF(y.. = y, betas.. = betas, 
+#                      n.cv.folds = 5, 
+#                      nfolds.. = nfolds, # nfolds is imported via the load("nfolds.RData")
+#                      cores = 10, 
+#                      seed = 1234, 
+#                      K.start = 1, k.start = 0,
+#                      out.path = "tRF/", out.fname = "CVfold", # (1) # creates an output folder tRF and exports resulting variables and objects into a CVfold.1.0.RData file for each (sub)fold, respectively 
+#                      mtry.min = NULL, mtry.max = NULL, length.mtry = 2, # (2) # If mtry.min and mtry.max arguments are left at default (NULL). The function equally divides floor(sqrt(ncol(betas)))*0.5) and floor(sqrt(ncol(betas))) to length.mtry parts
+#                      ntrees.min = 1000, ntrees.max = 2000, ntree.by = 500,
+#                      nodesize.proc = c(0.01, 0.05, 0.1), #(3) CRITICAL/Troubleshooting: The argument nodesize.proc requires three elements and adds the default values nodesize = 1 for classification and nodesize = 5 for regression in the subfunc_rf_caret_tuner_customRF()
+#                      p.n.pred.var = c(100, 500, 1000, 10000) # pvarsel
+#                      )
+
+# Tip: use ctr + shift + c or cmd + shift + c to swiftly uncomment the above function calls in RStudio
