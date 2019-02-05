@@ -217,7 +217,17 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
 ```
 3. This script contains: 
 + the function `run_nestedcv_tunedRF()` that integrates the (1.) sub- and (2.) training functions to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
-+ It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively. 
++ It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively.
+
+The output file `CVfold.K.k.RData` is comprised of the following objects:
++ predicted (uncalibrated/raw) scores matrices of the tuned RF using `p.n.pred.var` (`pvarsel`) number of CpG probes that resulted in the lowest BS, ME and LL metrics: 
+  + `scores.pred.rf.tuned.brier`  
+  + `scores.pred.rf.tuned.miscerr`  
+  + `scores.pred.rf.tuned.mlogl`  
++ `rfcv.tuned`: the output object of the (2.) `trainRF_caret_custom_tuner()` function 
++	`fold`: the corresponding *"K.k"* (sub)fold assignments with training and test/calibration sets  
+
+*CRITICAL/Troubleshooting: the output `CVfold.K.k.RData` file can be quite large (1-1.5Gb) because it contains multiple large matrix objects (ca. 215 MB each). Hence, saving all objects of the 5 x 5-fold nested CV scheme might require 30-50Gb free space on the hard drive.*
 
 ### 5. Perform calibration using ridge penalized  multinomial logistic regression (MR)
 
