@@ -179,8 +179,8 @@ source("subfunctions_tunedRF.R")
 ```
 1. This script contains: 
 + the `rfp()` function that provides a parallelized wrapper for the `randomForest::randomForest()`function.
-+ `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`  
-+ `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
++ `customRF` function for the caret package to enable tuning RF hyperparameters including `ntree`, `mtry` and `nodesize`.  
++ `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package.
 
 ```
 # 2. Training & Hyperparameter tuning & Variable selection are performed here
