@@ -79,9 +79,9 @@ betas.mtx <- as.matrix(betas)
 
 run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # load("nfolds.RData")
                                  cores = 10, seed = 1234, K.start = 1, k.start = 0, out.path = "tRF/", out.fname = "CVfold", 
-                                 mtry.min = NULL, mtry.max = NULL, length.mtry = 2,
+                                 mtry.min = NULL, mtry.max = NULL, length.mtry = 2, # If mtry.min and mtry.max arguments are left at default (NULL). The function equally divides floor(sqrt(ncol(betas)))*0.5) and floor(sqrt(ncol(betas))) to length.mtry parts 
                                  ntrees.min = 500, ntrees.max = 2000, ntree.by = 500,
-                                 nodesize.proc = c(0.01, 0.05, 0.1), 
+                                 nodesize.proc = c(0.01, 0.05, 0.1), # CRITICAL/Troubleshooting: The argument nodesize.proc requires three elements and adds the default values nodesize = 1 for classification and nodesize = 5 for regression in the subfunc_rf_caret_tuner_customRF()
                                  n.cv = 5, n.rep = 1,
                                  p.n.pred.var = c(100, 500, 1000, 10000)){
   
@@ -150,6 +150,9 @@ run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # 
       save(scores.pred.rf.tuned.brier, scores.pred.rf.tuned.miscerr, scores.pred.rf.tuned.mlogl, rfcv.tuned, fold, 
            file =  paste0(f.path, paste("CVfold", K, k, "RData", sep = ".")) 
            )
+      # CRITICAL/Troubleshooting: the output .RData file can be large, as it contains multiple copies of large matrices (2,801 x 10,000 approx. 215 MB each) 
+      # adding up to 1 - 1.5 Gb. Hence, the complete nested CV scheme might require 40-50Gb free space on the respective drive.
+      
     }
   }
   message("Finished ... ", Sys.time())
