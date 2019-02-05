@@ -229,7 +229,7 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 
 ***
 
-### 5. Perform calibration using ridge penalized  multinomial logistic regression (MR)
+### 5. Calibration using ridge penalized  multinomial logistic regression (MR)
 
 ```
 # Source the script
