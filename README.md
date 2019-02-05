@@ -28,8 +28,9 @@ This repository focuses on the internal validation and benchmarking of the combi
 ## Repo content
 
 All algorithms were implementated and evaluated within:  
-+ 5 x 5 fold nested cross-validation (CV) scheme  
-  + **R package**: base R
++ 5 x 5-fold nested cross-validation (CV) scheme using stratified sampling  
+  + **R package**: base R  
+  + **R script**: `makefolds.R` (generates the list object `nfolds`)
 
 ### 1. Machine learning (ML) classifiers:
 + Random Forests (RF) 
