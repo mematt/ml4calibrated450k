@@ -233,14 +233,14 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 
 ***
 
-### 5. Calibration using ridge penalized  multinomial logistic regression (MR)
+### 6. Calibration using ridge penalized  multinomial logistic regression (MR)
 
 ```
 # Source the script
 source("calibration_tRF.R")
 ```
 
-### 6.	Performance evaluation
+### 7. Performance evaluation
 
 Use a comprehensive panel of performance metrics: 
 + For Discrimination - derived from the ROC plot: 
