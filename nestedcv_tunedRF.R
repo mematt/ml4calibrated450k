@@ -94,7 +94,7 @@ run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # 
     for(k in k.start:n.cv.folds){ 
       
       if(k > 0){ message("\n \nCalculating inner/nested fold ", K,".", k,"  ... ",Sys.time())  # Inner CV loops 1.1-1.5 (Fig. 1.)
-        fold <- nfolds..[[K]][[2]][[k]]  ### [[2]] means inner loop
+        fold <- nfolds..[[K]][[2]][[k]]  ### [[]][[2]][[]] means inner loop
       } else{                                                                          
         message("\n \nCalculating outer fold ", K,".0  ... ",Sys.time()) # Outer CV loops 1.0-5.0 (Fig. 1.)
         fold <- nfolds..[[K]][[1]][[1]]   ### [[]][[1]][[]] means outer loop 
