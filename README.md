@@ -135,7 +135,7 @@ Below, we present the steps needed to perform hyperparameter tuning for the RF c
 ### 3. Load data sets & objects
 
 Here, we assume that the pre-processing script (https://github.com/mwsill/mnp_training/blob/master/preprocessing.R) has already been carried out to generate the `MNPbetas10Kvar.RData` file.   
-As an alternative the outcome vector `y` (`y.RData`) and the subset of the `betas` (`betas1000.RData`) data frame (with only the 1000 most variable CpG probes) are directly downloadbale from this repository. 
+As an alternative, the outcome vector `y` (`y.RData`) and the subset of the `betas` (`betas1000.RData`) data frame (with only the 1000 most variable CpG probes) are directly downloadbale from this repository. 
 
 ```{r}
 # Load the data sets 
