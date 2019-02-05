@@ -172,7 +172,7 @@ Because the respective R package for each investigated ML-classifier algorithm h
 
 1) **subfunctions** are invoked to enable the tuning and/or to extract the optimal hyperparameter settings from the respective predictor algorithm and/or form the ML-framework of the `caret` package;  
 2) **training function** (e.g. `trainRF_caret_custom_tuner`) performs hyperparameter tuning by using the corresponding subfunctions;  
-3) **nested CV**, finally the training function is implemented within the nested cross-validation scheme and wrapped into a separate function (e.g. `run_nestedcv_tunedRF`).
+3) **nested CV**: finally, the training function is implemented within the nested cross-validation scheme and wrapped into a separate function (e.g. `run_nestedcv_tunedRF`), which performs the complete internal validation.
 
 ```
 # 1. Subfunctions to define and perform custom grid search using the caret package
