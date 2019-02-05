@@ -134,7 +134,8 @@ Below, we present the steps needed to perform hyperparameter tuning for the RF c
 
 ### 3. Load data sets & objects
 
-Here, we assume that the pre-processing script (https://github.com/mwsill/mnp_training/blob/master/preprocessing.R) has already been carried out to generate the `MNPbetas10Kvar.RData` file.
+Here, we assume that the pre-processing script (https://github.com/mwsill/mnp_training/blob/master/preprocessing.R) has already been carried out to generate the `MNPbetas10Kvar.RData` file. 
+As an alternative the outcome vector `y` (`y.RData`) and the subset of the `betas` (`betas1000.RData`) data frame (with only the 1000 most variable CpG probes) are directly downloadbale from this repository. 
 
 ```{r}
 # Load the data sets 
@@ -150,7 +151,7 @@ load("y.RData") # contains the y vector of true class labels (with 91 levels)
 # Nested resampling scheme 
 load("nfolds.RData")
 # contains the "nfolds" list object with the folds assignments to perform 
-# the nested 5 x 5-fold CV for internal validation
+# the nested 5 x 5-fold CV for internal validation.
 ```
   
 ### 4. Setup and import pre-requisite R packages.
