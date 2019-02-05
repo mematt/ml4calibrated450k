@@ -183,9 +183,8 @@ source("subfunctions_tunedRF.R")
 + `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package
 
 ```
-# 2. Training & Hyperparameter tuning & Variable selection performed here
+# 2. Training & Hyperparameter tuning & Variable selection are performed here
 source("train_tunedRF.R")
-# This script contains the trainRF_caret_custom_tuner()
 ```
 2. This script contains:
 + a custom function (`trainRF_caret_custom_tuner()`) for the whole tuning process of RF hyperparameters including `mtry`, `ntree` and `nodesize` as well as `pvarsel` (i.e. the number of CpG probes that result in the lowest BS, LL and ME metrics).
