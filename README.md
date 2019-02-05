@@ -170,7 +170,7 @@ cores <- detectCores()-1
 
 Because the respective R package for each investigated ML-classifier algorithm has different built-in functionalities our R scripts follow a 3-layered approach to carry out the internal validation process: 
 
-1) **subfunctions** are invoked to enable the tuning and/or to extract the optimal hyperparameter settings from the respective predictor algorithm and/or ML-framework like the `caret` package;  
+1) **subfunctions** are invoked to enable the tuning and/or to extract the optimal hyperparameter settings from the respective predictor algorithm and/or form the ML-framework of the `caret` package;  
 2) **training function** (e.g. `trainRF_caret_custom_tuner`) performs hyperparameter tuning by using the corresponding subfunctions;  
 3) **nested CV**, finally the training function is implemented within the nested cross-validation scheme and wrapped into a separate function (e.g. `run_nestedcv_tunedRF`).
 
