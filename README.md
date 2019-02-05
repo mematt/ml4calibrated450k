@@ -166,12 +166,13 @@ library(caret)
 cores <- detectCores()-1 
 ```
 
-### 5. Source R.scripts necessary for tuning and fitting the RF classifier
+### 5. Source/Run R scripts necessary for tuning and fitting the RF classifier
 
-We use a 3-layered approach for each ML-classifier algorithm including: 
-1. subfunctions 
-2. training functions and finally the 
-3. nested CV 
+Because the respective R package for each investigated ML-classifier algorithm has different built-in functionalities our R scripts follow a 3-layered approach to carry out the internal validation process: 
+
+1) **subfunctions** are invoked to enable the tuning and/or to extract the optimal hyperparameter settings from the respective predictor algorithm and/or ML-framework like the `caret` package;  
+2) **training function** (e.g. `trainRF_caret_custom_tuner`) performs hyperparameter tuning by using the corresponding subfunctions;  
+3) **nested CV**, finally the training function is implemented within the nested cross-validation scheme and wrapped into a separate function (e.g. `run_nestedcv_tunedRF`).
 
 ```
 # 1. Subfunctions to define and perform custom grid search using the caret package
