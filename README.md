@@ -220,7 +220,7 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
 + It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively.
 
 The output file `CVfold.K.k.RData` is comprised of the following objects:
-+ predicted (uncalibrated/raw) scores matrices of the tuned RF using `p.n.pred.var` (`pvarsel`) number of CpG probes that resulted in the lowest BS, ME and LL metrics: 
++ predicted (uncalibrated/raw) scores matrices of the tuned RF using `p.n.pred.var` (`pvarsel`) number of CpG probes that resulted in the lowest BS, ME and LL metrics, respectively: 
   + `scores.pred.rf.tuned.brier`  
   + `scores.pred.rf.tuned.miscerr`  
   + `scores.pred.rf.tuned.mlogl`  
