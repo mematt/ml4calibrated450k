@@ -27,6 +27,7 @@ This repository focuses on the internal validation and benchmarking of the combi
 
 ## Repo content
 
+### Resampling scheme
 All algorithms were implementated and evaluated within:  
 + 5 x 5-fold nested cross-validation (CV) scheme using stratified sampling  
   + **R package**: base R  
