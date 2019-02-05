@@ -240,6 +240,8 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 source("calibration_tRF.R")
 ```
 
+***
+
 ### 7. Performance evaluation
 
 Use a comprehensive panel of performance metrics: 
