@@ -85,10 +85,10 @@ Runtimes for GPU (NVIDIA CUDA-accelerated) SVM classifiers with RBF or LK (`Rgts
  
 ## OS & Setup requirements 
 
-We tested our R scirpts under 
-+ Both CPU and GPU 
+We tested our R scripts using 
++ both CPU and GPU on
   + Ubuntu  16.04.03 LTS
-+ CPU only 
++ CPU only on
   + Mac OS X El Capitan 10.11.6, OS X Mojave 10.14.2 
 
 R: A Language and Environment for Statistical Computing, v.3.3.3 - 3.4
