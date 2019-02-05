@@ -195,6 +195,8 @@ source("train_tunedRF.R")
 # 3. Source scripts for full evaluation of tRF in the nested CV scheme 
 source("nestedcv_tunedRF.R")
 
+# Timing: for outerfolds ~4 – 4.5-h ; for the full 5 x 5-fold nested CV scheme 4 – 5 days depending on the tuning grid size.
+
 # Run the function that performs the task
 run_nestedcv_tunedRF(y.. = y, betas.. = betas, 
                      n.cv.folds = 5, 
