@@ -21,7 +21,7 @@ The benchmarking data set was based on the 10,000 most variable CpG probes and i
 
 A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download in this repository. The true class label vector `y.RData` is also directly downloadable from here. 
 
-This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in the submitted paper).
+This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms to develop ML-workflows for estimating class probabilities for precision cancer diagnostics (see *Figure 1 - Part 2* in the submitted paper).
 
 ***
 
