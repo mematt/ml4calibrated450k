@@ -214,7 +214,7 @@ run_nestedcv_tunedRF(y.. = y, betas.. = betas,
                      )
 ```
 3. This script contains: 
-+ the function `run_nestedcv_tunedRF()` that integrates the (1.) sub- and (2.) training functions to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
++ the function `run_nestedcv_tunedRF()` that integrates the (1.) **sub-** and (2.) **training functions** to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
 + It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively.
 
 The output file `CVfold.K.k.RData` is comprised of the following objects:
