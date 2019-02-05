@@ -32,7 +32,7 @@ All algorithms were implementated and evaluated within:
   + **R package**: base R  
   + **R script**: `makefolds.R` (generates the list object `nfolds`, which is also available as `nfolds.RData`)
 
-### 1. Machine learning (ML) classifiers:
+### Machine learning (ML) classifiers:
 + Random Forests (RF) 
   + vanilla RF (using default settings; vRF)
   + tuned RF (tRF)
@@ -53,7 +53,7 @@ All algorithms were implementated and evaluated within:
   + comperehensive tuning of multiple tuning parameters
   + **R package(s)**: `xgboost`, `caret`
   
-### 2. Calibration/Post-processing algortihms:
+### Calibration/Post-processing algortihms:
 + Platt scaling 
   + Logistic Regression (LR)
       + **R package**: `glm` (base R function)
@@ -62,7 +62,7 @@ All algorithms were implementated and evaluated within:
 + Ridge penalized multinomial logistic regression (MR)  
   +   + **R package**: `glmnet`
       
-### 3. Performance evaluation: 
+### Performance evaluation: 
 We also provide scripts for evaluation (e.g. `performance_evaluation_tRF.R`) such as:
 + Misclassification error (ME)
 + Multiclass AUCH as published by Hand and Till (2001)
