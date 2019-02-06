@@ -240,6 +240,40 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 source("calibration_tRF.R")
 ```
 
+This script contains: 
+  + the `calibrate_tRF_MR()`function that by default 
+    + creates an output folder (*"tRF/MR-calibrated/"* within the working directory and 
+    + generates `probsCVfold.{which.optimizer.metric}.K.0.RData`files, which are comprised of 
+      + the raw `scores`and 
+      + MR-calibrated probabilities `probs`matrices, plus misclassification errors for each fold
+      
+```
+# For cv.glmnet, it is recommended to register a "doMC" parallel backend 
+# as it uses foreach functionalities for 10-fold CV of lambda  
+
+library(doMC)
+registerDoMC(cores=10)
+
+calibrate_tRF_MR(out.path = "tRF/MR-calibrated/", out.fname = "probsCVfold", 
+                 nfolds.. = NULL, y.. = NULL, # automatically checks for & gets the nfolds (list) and y (vector) variables from .Globalenv
+                 load.path.w.name = "./tRF/CVfold.", 
+                 which.optimized.metric = "brier", # c("brier", "miscerr", "mlogl", "vanilla")
+                 verbose.messages = T,   # more verbose output 
+                 parallel.cv.glmnet = T, # needs parallel backend 
+                 setseed = 1234)
+```
+
+Timing: 
+Multi-core (10 threads):
+  + Training the MR model + Predicting the outer test set: ca. 1 min 15-25s / fold / metric (BS | ME | LL)
+  + Full run: ca. 7 min / metric (BS | ME | LL)
+Single core:
+  + Training the MR model + Predicting the outer test set: ca. 4-5 mins / fold / metric (BS | ME | LL)
+  + Full run: ca. 23 - 25 min / tRF_{BS | ME | LL} 
+
+Output object size: 400-500KB / fold (e.g. probsCVfold.brier.1.0.RData)
+  
+
 ***
 
 ### 7. Performance evaluation
