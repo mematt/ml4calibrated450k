@@ -180,7 +180,7 @@ Because the respective R package for each investigated ML-classifier algorithm h
 3) **nested CV**: finally, the training function is implemented within the nested cross-validation scheme and wrapped into a separate function (e.g. `run_nestedcv_tunedRF`), which performs the complete internal validation.
 
 ```
-# 1. Subfunctions to define and perform custom grid search using the caret package
+# 5.1. Subfunctions to define and perform custom grid search using the caret package
 source("subfunctions_tunedRF.R")
 ```
 1. This script contains: 
@@ -189,7 +189,7 @@ source("subfunctions_tunedRF.R")
 + `subfunc_rf_caret_tuner_customRF()` to perform grid search using an extra nested n-fold CV with the `caret` package.
 
 ```
-# 2. Training & Hyperparameter tuning & Variable selection are performed here
+# 5.2. Training & Hyperparameter tuning & Variable selection are performed here
 source("train_tunedRF.R")
 ```
 2. This script contains:
@@ -197,7 +197,7 @@ source("train_tunedRF.R")
 
 
 ```
-# 3. Source scripts for full evaluation of tRF in the nested CV scheme 
+# 5.3. Source scripts for full evaluation of tRF in the nested CV scheme 
 source("nestedcv_tunedRF.R")
 
 # Timing: for outerfolds ~4 – 4.5-h ; for the full 5 x 5-fold nested CV scheme 4 – 5 days depending on the tuning grid size.
