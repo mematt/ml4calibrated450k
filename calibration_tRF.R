@@ -134,6 +134,8 @@ calibrate_tRF_MR <- function(out.path = "tRF/MR-calibrated/", out.fname = "probs
 # For cv.glmnet it is recommended to register a "doMC" parallel backend (for 10-fold CV of lambda it uses foreach under the hood) 
 # library(doMC)
 # registerDoMC(cores=10)
+# Note that you can register a different parallel backend later, or deregister doMC by registering the sequential backend by calling the 
+# #registerDoSEQ() # function
 
 # calibrate_tRF_MR(out.path = "tRF/MR-calibrated/", out.fname = "probsCVfold",
 #                              nfolds.. = NULL,
@@ -148,8 +150,3 @@ calibrate_tRF_MR <- function(out.path = "tRF/MR-calibrated/", out.fname = "probs
 # Multi-core (10 threads):
 # Training the MR model + Predicting the outer test set: ca. 1 min 15-25s / fold / metric (BS | ME | LL)
 # Full run: ca. 7 min / metric (tRF_{BS | ME | LL}) 
-
-
-
-
-
