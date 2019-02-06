@@ -239,7 +239,6 @@ The output file `CVfold.K.k.RData` is comprised of the following objects:
 # Source the script
 source("calibration_tRF.R")
 ```
-
 This script contains: 
   + the `calibrate_tRF_MR()`function that by default 
     + creates an output folder (*"tRF/MR-calibrated/"* within the working directory and 
@@ -248,12 +247,13 @@ This script contains:
       + MR-calibrated probabilities `probs`matrices, plus misclassification errors for each fold
       
 ```
+# Parallel backend
 # For cv.glmnet, it is recommended to register a "doMC" parallel backend 
 # as it uses foreach functionalities for 10-fold CV of lambda  
-
 library(doMC)
 registerDoMC(cores=10)
 
+# Function call:
 calibrate_tRF_MR(out.path = "tRF/MR-calibrated/", out.fname = "probsCVfold", 
                  nfolds.. = NULL, y.. = NULL, # automatically checks for & gets the nfolds (list) and y (vector) variables from .Globalenv
                  load.path.w.name = "./tRF/CVfold.", 
@@ -267,6 +267,7 @@ Timing:
 Multi-core (10 threads):
   + Training the MR model + Predicting the outer test set: ca. 1 min 15-25s / fold / metric (BS | ME | LL)
   + Full run: ca. 7 min / metric (BS | ME | LL)
+  
 Single core:
   + Training the MR model + Predicting the outer test set: ca. 4-5 mins / fold / metric (BS | ME | LL)
   + Full run: ca. 23 - 25 min / tRF_{BS | ME | LL} 
