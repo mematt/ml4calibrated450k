@@ -292,3 +292,34 @@ Use a comprehensive panel of performance metrics:
 source("performance_evaluation_tRF.R")
 ```
 
+This script contains: 
+  + the `performance_evaluator()` function that sources the `brier.R` and `mlogloss.R`scripts to generate performance metrics.
+    +  `performance_evaluator()` returns a list with elements `misc.error`, `auc.HandTill`, `brier`, and `mlogloss`.
+  
+  ```
+  # Default function settings
+  performance_evaluator(load.path.w.name. = "./tRF/MR-calibrated-test2/probsCVfold.brier.",
+                        name.of.obj.to.load = NULL, # as.character ; defaults to the calibrated `probs` object
+                        nfolds.. = NULL,       # looks for and gets `nfolds` from .Globalenv 
+                        betas.. = NULL,        # looks for and gets `betas` from .Globalenv 
+                        y.. = NULL,            # looks for and gets `y` from .Globalenv 
+                        scale.rowsum.to.1 = T, # by default rescales for mAUC
+                        reorder.columns = F,   # for tRF it is not required but for SVM set to T
+                        reorder.rows = T,      # required for RF
+                        misc.err = T, 
+                        multi.auc.HandTill2001 = T, 
+                        brier = T, 
+                        mlogLoss = T,
+                        verbose = T # gives a verbose output
+                        )
+                        
+# Function call:
+# Timing < 1 min
+performance_evaluator(name.of.obj.to.load = "scores")
+
+# Or with lapply()
+l.obj.names <- list("scores", "probs")
+l.perf.eval <- lapply(seq_along(l.obj.names), function(i){
+   performance_evaluator(name.of.obj.to.load = l.obj.names[[i]])
+})
+```
