@@ -298,7 +298,7 @@ This script contains:
   
   ```
   # Default function settings
-  performance_evaluator(load.path.w.name. = "./tRF/MR-calibrated-test2/probsCVfold.brier.",
+  performance_evaluator(load.path.w.name. = "./tRF/MR-calibrated/probsCVfold.brier.",
                         name.of.obj.to.load = NULL, # as.character ; defaults to the calibrated `probs` object
                         nfolds.. = NULL,       # looks for and gets `nfolds` from .Globalenv 
                         betas.. = NULL,        # looks for and gets `betas` from .Globalenv 
