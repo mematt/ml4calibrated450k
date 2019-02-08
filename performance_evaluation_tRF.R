@@ -23,7 +23,7 @@ subfunc_multiclass_AUC_HandTill2001 <- function(y.true.class, y.pred.matrix.rows
 
 
 # Performance evaluator function (all metrics integrated)
-performance_evaluator <- function(load.path.w.name. = "./tRF/MR-calibrated-test2/probsCVfold.brier.", 
+performance_evaluator <- function(load.path.w.name. = "./tRF/MR-calibrated/probsCVfold.brier.", 
                                   name.of.obj.to.load = NULL, # as.character # defaults to "probs"  
                                   nfolds.. = NULL, 
                                   betas.. = NULL,         # defaults to BTMD obects
