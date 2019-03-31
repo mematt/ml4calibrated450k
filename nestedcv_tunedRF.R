@@ -148,7 +148,7 @@ run_nestedcv_tunedRF <- function(y.., betas.., n.cv.folds = 5, nfolds..=NULL, # 
       dir.create(f.path, showWarnings = F)
       # Save file as .RData
       save(scores.pred.rf.tuned.brier, scores.pred.rf.tuned.miscerr, scores.pred.rf.tuned.mlogl, rfcv.tuned, fold, 
-           file =  paste0(f.path, paste("CVfold", K, k, "RData", sep = ".")) 
+           file =  paste0(f.path, paste(out.fname, K, k, "RData", sep = ".")) 
            )
       # CRITICAL/Troubleshooting: the output .RData file can be large, as it contains multiple copies of large matrices (2,801 x 10,000 approx. 215 MB each) 
       # adding up to 1 - 1.5 Gb. Hence, the complete nested CV scheme might require 40-50Gb free space on the respective drive.
