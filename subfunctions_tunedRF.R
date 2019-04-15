@@ -68,7 +68,7 @@ subfunc_rf_caret_tuner_customRF <- function(y.subfunc, betas.subfunc,
                                             ntrees.min = 1000, ntrees.max = 2000, ntree.by = 500,
                                             nodesize.proc = c(0.01, 0.05, 0.1),
                                             n.cv = 5, n.rep = 1,
-                                            seed, allowParall = T,
+                                            seed = 1234, allowParall = T,
                                             print.res = T){
   # Train control
   control <- trainControl(method = "repeatedcv", number = n.cv, repeats = n.rep, classProbs = F, summaryFunction = multiClassSummary, allowParallel = allowParall)
