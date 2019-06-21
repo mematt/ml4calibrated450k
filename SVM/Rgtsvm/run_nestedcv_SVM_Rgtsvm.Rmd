@@ -1,0 +1,93 @@
+---
+title: "np-svm: SVM-Rgtsvm"
+author: "mematt"
+date: "4/27/2019"
+output: 
+  html_notebook: 
+    toc: yes
+    toc_depth: 4
+---
+
+# ml4calibrated450k - Support Vector Machines (SVM) with linear kernels (LK) using GPU acceleration (Rgtsvm)
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r}
+# Load the Rgtsvm library
+library(Rgtsvm)
+# The installation of the Rgtsvm package and its prerequisites (NVIDIA CUDA library, Boost library) is beyond the scope of this script. 
+# Please follow the instructions on the GitHub page of Rgtsvm <https://github.com/Danko-Lab/Rgtsvm>
+# In our setup we used: R 3.4.4 ; CUDA 8.0 ; Boost 1.67 ; Rgtsvm v0.5
+
+# 1. Source utility/subfunctions (low level)
+source("subfunctions_SVM_Rgtsvm.R")
+
+# 2. Source nestedcv function (high level)
+source("nestedcv_SVM_Rgtsvm.R")
+```
+
+***
+
+## Run 
+
+### Load `y.RData` and `nfolds.RData` objects into the global environment (.GlobalEnv) 
+
+These are going to be fetched automatically from `.GlobalEnv` by the `run_nestedcv_SVM_Rgtsvm()` function
+
+```{r}
+# Load needed data objects ----------------------------------------------------------------------------------------------------------------------
+
+# Local path if "./data" folder is in the working directory
+load("./data/y.RData")
+load("./data/nfolds.RData")
+
+# Suggested path in `rocker` (docker) container for R 
+# load("/home/rstudio/data/y.RData")
+# load("/home/rstudio/data/nfolds.RData")
+```
+
+***
+
+### Function call `run_nestedcv_SVM_Rgtsvm()` with hyperparameter (C, cost) tuning 
+
+Default >> `y.. = NULL`, `betas.. = NULL` reading `betas.K.k.RData` objects from folder path `"... /data/betas.train.test.10k.filtered/"`
+
+See also **Figure 1., steps 7 - 10 | Internal validation**.
+
++ Outputs of Rgtsvm are calibrated probabilities using a *1-vs-all* coupling framework with LL-optimized global softmax to calculate multiclass probabilities.
++ As a consequence it retains the order of class labels (i.e. `levels(y)`) and only row reordering is required. 
++ <NOTE> In contrast to SVM-LK `e1071` and `LiblineaR`, which both use a *1-vs-1* approach that mixes up the order or levels within each (sub)fold differently (!).
+
+
+```{r, echo=T}
+
+# Run the function that fits GPU-accelerated linear kernel SVM (Rgtsvm)
+Sys.time() # ~ 19 mins / pro fold  | nCV=0 @ NVIDIA GTX 1080Ti
+
+run_nestedcv_SVM_Rgtsvm(y.. = NULL, 
+                        betas.. = NULL, 
+                        path.betas.var.filtered = "/home/rstudio/data/betas.train.test.10k.filtered/",
+                        fname.betas.p.varfilt = "betas",
+                        subset.CpGs.1k = F, #10k 
+                        n.cv.folds = 5, 
+                        nfolds.. = NULL,    
+                        K.start = 1, k.start = 0,
+                        K.stop = NULL, k.stop = NULL, 
+                        n.CV. = 0,  # extra nested CV to tune the Cost parameter 
+                        Cost = c(10^(-5:-2)),
+                        scale.training.n.test.sets = T, 
+                        probability.output = T,
+                        GPU.ID = 0, # check with "nvidia-smi" in the terminal 
+                        verbose.training = T,
+                        seed = 1234, 
+                        out.path = "SVM-Rgtsvm-10k-nCV-0x", 
+                        out.fname = "CVfold") 
+Sys.time()
+
+# TROUBLESHOOTING:
+# "Error: at least one example of each label in {0,1,...,max} must be present in training setError in gtsvmtrain.classfication.call(y[-idx.cross], x0, param, final.result = TRUE,  : Error in GPU process.
+# SOLUTION: ==> try another seed and/or limit n.CV.=3
+# In the above function call we have set n.CV. = 0 to speed up calculations
+```

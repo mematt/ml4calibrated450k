@@ -1,0 +1,173 @@
+---
+title: "calibrate-vRF-tRF-ml4calibrated450k"
+author: "mematt"
+date: "5/12/2019"
+output: 
+  word_document: 
+    toc: yes
+    toc_depth: 4
+---
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r, echo=TRUE, tidy=TRUE}
+# 1. Source subfunctions for Platt scaling (LR)
+source("calibration_Platt_LR.R")
+
+# 2. Source subfunctions for Platt scaling (FLR)
+source("calibration_Platt_FLR.R")
+
+# 3. Source subfunctions for multinomial ridge regression (MR)
+source("calibration_MR.R")
+
+# 4. Source the integrated wrapper of all (LR, FLR, MR) the above
+source("calibrator_integrated_wrapper_LR_FLR_MR.R")
+```
+
+**<NOTE>** to speed up performance parallel backend can be registered. See the `README.md` of the GitHub repository or the other scripts.
+
+***
+
+### Figure 1. steps 11 - 13  | Calibration 
+
+#### Example code to calibrate vRF 
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+calibrate_LR(out.path = "vRF-calibrated-LR/",
+             out.fname = "probsCVfold",
+             nfolds.. = NULL,
+             y.. = NULL,
+             load.path.w.name = "./vRF/CVfold.",
+             which.optimized.metric.or.algorithm = "vanilla", 
+             save.metric.name.into.output.file = T,
+             verbose.messages = F)
+
+
+calibrate_FLR(out.path = "vRF-calibrated-FLR/",
+              out.fname = "probsCVfold",
+              nfolds.. = NULL,
+              y.. = NULL,
+              load.path.w.name = "./vRF/CVfold.",
+              which.optimized.metric.or.algorithm = "vanilla",
+              save.metric.name.into.output.file = T,
+              verbose.messages = T)
+
+
+
+calibrate_MR(out.path = "/vRF-calibrated-MR/",
+             out.fname = "probsCVfold",
+             nfolds.. = NULL,
+             y.. = NULL,
+             load.path.w.name = "./vRF/CVfold.",
+             verbose.messages = T,
+             which.optimized.metric.or.algorithm = "vanilla", 
+             save.metric.name.into.output.file = T,
+             parallel.cv.glmnet = T,
+             setseed = 1234)
+
+```
+
+
+***
+
+#### Example code chunk to calibrate using all algorithms (LR, FLR, MR) on each tRF metric separately
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+# tRF_BS + {LR; FLR; MR} ----------------------------------------------------------------------------------------------------
+Sys.time()
+t_calib_integrated_all_tRF_BS <- system.time(
+  calibrator_integrated_wrapper(out.path = "./tRF-BS-calibrator-integrated/",
+                                load.path.w.name = "./tRF/CVfold.",
+                                which.optimized.metric.or.algorithm = "brier",
+                                which.calibrator = "all",
+                                verbose.messages = F,
+                                save.metric.name.into.output.file = T,
+                                parallel.cv.glmnet = T,
+                                setseed = 1234)
+
+)
+Sys.time()
+
+# # tRF_ME + {LR; FLR; MR} ----------------------------------------------------------------------------------------------------
+Sys.time()
+t_calib_integrated_all_tRF_ME <- system.time(
+  calibrator_integrated_wrapper(out.path = "./tRF-ME-calibrator-integrated/",
+                                load.path.w.name = "./tRF/CVfold.",
+                                which.optimized.metric.or.algorithm = "miscerr",
+                                which.calibrator = "all",
+                                verbose.messages = F,
+                                save.metric.name.into.output.file = T,
+                                parallel.cv.glmnet = T,
+                                setseed = 1234)
+
+)
+Sys.time()
+
+# # tRF_LL + {LR; FLR; MR} ----------------------------------------------------------------------------------------------------
+Sys.time()
+t_calib_integrated_all_tRF_LL <- system.time(
+  calibrator_integrated_wrapper(out.path = "./tRF-LL-calibrator-integrated/",
+                                load.path.w.name = "./tRF/CVfold.",
+                                which.optimized.metric.or.algorithm = "mlogl",
+                                which.calibrator = "all",
+                                verbose.messages = F,
+                                save.metric.name.into.output.file = T,
+                                parallel.cv.glmnet = T,
+                                setseed = 1234)
+
+)
+Sys.time()
+```
+
+***
+
+#### Code chunck to perform calibration with all algorithms (LR, FLR, MR) on all evaluation metrics of tRF (BS, ME, LL) concurrently
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+### Run all for each metric and all calibration algorithms -------------------------------------------------------------------------------------------------------------------------------------------------------
+tRF.opt.metrics.folder.name <- c("BS", "ME", "LL")
+tRF.folder.path <- as.list(rep(paste("tRF",
+                                     tRF.opt.metrics.folder.name, 
+                                     "calibrator-integrated", 
+                                     sep = "-"), 
+                               each = 3))
+tRF.opt.metrics.long.RData <- rep(c("brier", "miscerr", "mlogl"), each = 3)
+calibrator.name <- c("LR", "FLR", "MR")
+tRF.fname.stump <- as.list(paste("probsCVfold",
+                                 tRF.opt.metrics.long.RData,
+                                 rep(calibrator.name, 3),
+                                 sep = ".")
+                           )
+
+# Short call using mapply
+tRF.l.perfevals.all <- mapply(FUN = performance_evaluator, 
+                              load.path.folder = tRF.folder.path, 
+                              load.fname.stump = tRF.fname.stump)
+tRF.l.perfevals.all # matrix
+
+# Add colnames
+colnames(tRF.l.perfevals.all) <- tRF.fname.stump
+# Rename
+tRF_ALL_LR_FLR_MR_perfeval <- try.l.perfevals.all
+
+# Save
+#save(tRF_ALL_LR_FLR_MR_perfeval, file = "./performance evaluation/tRF_ALL_LR_FLR_MR_perfeval.RData")
+```
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+tRF.l.perfevals.all
+```
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+tRF_ALL_LR_FLR_MR_perfeval[, 1:3]
+```
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+tRF_ALL_LR_FLR_MR_perfeval[, 4:6]
+```
+
+```{r, eval=FALSE, echo=TRUE, tidy=TRUE}
+tRF_ALL_LR_FLR_MR_perfeval[, 7:9]
+```
+

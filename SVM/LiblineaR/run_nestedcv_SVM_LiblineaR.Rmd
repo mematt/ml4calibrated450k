@@ -1,0 +1,128 @@
+---
+title: "run-nested-SVM-LiblineaR-ml4calibrated450k"
+author: "mematt"
+date: "4/27/2019"
+output: 
+  html_notebook: 
+    toc: yes
+    toc_depth: 4
+---
+
+# ml4calibrated450k - Support Vector Machines (SVM) with linear kernels (LK) using the `LiblineaR`package
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r}
+# 1. Source utility/subfunctions (low level)
+source("subfunctions_SVM_LiblineaR.R")
+# Installs and loads the required packages doMC, LiblineaR, e1071
+
+# 2. Source train function (mid level)
+source("train_SVM_LiblineaR.R")
+
+# 3. Source nestedcv function (high level)
+source("nestedcv_SVM_LiblineaR.R")
+```
+
+***
+
+## Run
+
+### Define parallel backend using `doMC` 
+
+```{r}
+# Register parallel backend --------------------------------------------------------------------------------------------------------------------
+
+# 1. doMC  ----------------------------------------------------------------------------------------------------------------------
+library(doMC)
+# <Note> that you can register a different parallel backend later, or deregister doMC by registering the sequential backend by calling the `registerDoSEQ()` function
+
+# Detect cores(/threads)
+n_threads <- cores <- detectCores()-1 # leave 1 thread for the OS
+registerDoMC(cores)
+#registerDoMC(cores = n_threads)
+# Check backend
+getDoParVersion()    # "1.3.5"
+getDoParWorkers()    # 
+getDoParRegistered() # TRUE
+#registerDoSEQ()
+
+
+# Test parallel backend if it is running/functioning - by Hadley Wickham - AdvR p.374. ---------------------------------------------
+my_pause <- function(i){
+  function(x) Sys.sleep(i)
+}
+
+system.time(lapply(1:10, my_pause(0.25)))
+#   user  system elapsed 
+#  0.008   0.000   2.502
+system.time(mclapply(1:10, my_pause(0.25), mc.cores = cores)) # 64
+#   user  system elapsed 
+#  0.004   0.272   0.269
+```
+
+***
+
+### Load `y.RData` and `nfolds.RData` objects into the global environment (.GlobalEnv) 
+
+These are going to be fetched automatically from `.GlobalEnv` by the `run_nestedcv_SVM_LiblineaR()` function
+
+```{r}
+# Load needed data objects ---------------------------------------------------------------------------------------------------------------------
+
+# Local path if "./data" folder is in the working directory
+load("./data/y.RData")
+load("./data/nfolds.RData")
+
+# Suggested path in `rocker` (docker) container for R 
+# load("/home/rstudio/data/y.RData")
+# load("/home/rstudio/data/nfolds.RData")
+```
+
+***
+
+### Function call `run_nestedcv_SVM_LiblineaR()` with hyperparameter (C, cost) tuning 
+
+Default >> `y.. = NULL`, `betas.. = NULL` reading `betas.K.k.RData` objects from folder path `"... /data/betas.train.test.10k.filtered/"`
+
+See also **Figure 1., steps 7 - 10 | Internal validation**.
+
+The `run_nestedcv_SVM_LiblineaR()` function performs hyperparameter (C, cost) tuning using 5-fold extra nested CV within the training loop for  
+1. type 0: L2-regularized logistic regression (L2LR) and  
+2. type 4: Crammer & Singer SVC models
+
+```{r}
+# <INFO>
+# L2-LR:
+# Run time: ~ 100 min/fold with nCV = 5 for C = {0.001, 0.01} @ 11 threads @ i7 6850k 
+# Run time: ~ 9h 45min/fold with nCV=5 for C=10⁻3:3 @ i9 7960x @ 32 cores for L2-LR! (especially for C>10)
+# Crammer Singer type 4 SVC:
+# Run time: ~ 13-15 min/fold with nCV=5 for C=10⁻3:3 @ i7 7700k @ 8 cores => ~6h for full (5x5) run.
+
+# <CRITICAL> when running only the type 4 – support vector classification by Crammer and Singer ==> 
+#           set `mod.type = 4` and `type4.CramSing = F` ; otherwise CS-SVC runs 2x.
+
+# Fitting type 4 CS-SVC only -------------------------------------------------------------------------------------------------------------------
+Sys.time() # [1] "2019-04-30 13:28:27 UTC"
+run_nestedcv_SVM_LiblineaR(y.. = NULL, 
+                           betas.. = NULL, 
+                           path.betas.var.filtered = "/home/rstudio/data/betas.train.test.10k.filtered/",
+                           fname.betas.p.varfilt = "betas",
+                           subset.CpGs.1k = F, 
+                           n.cv.folds = 5, 
+                           nfolds.. = NULL,   
+                           K.start = 1, k.start = 0,
+                           K.stop = NULL, k.stop = NULL, 
+                           n.CV. = 5,  # extra nested tuning within the training loop
+                           C.base = 10, C.min = -3, C.max = 3, 
+                           mod.type = 4, 
+                           type4.CramSing = F, # only class estimates no probability estimates
+                           parallel = T,
+                           n.mc.cores = n_threads,
+                           seed = 1234, 
+                           out.path = "SVM-LiblineaR-10k-nCV-5x-type4-CS", 
+                           out.fname = "CVfold")
+Sys.time() # [1] "2019-04-30 19:23:40 UTC"
+```

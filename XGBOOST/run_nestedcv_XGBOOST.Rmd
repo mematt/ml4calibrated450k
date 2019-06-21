@@ -1,0 +1,104 @@
+---
+title: "run-nested-XGBOOST-ml4calibrated450k"
+author: "mematt"
+date: "4/27/2019"
+output: 
+  html_notebook: 
+    toc: yes
+    toc_depth: 4
+---
+
+# ml4calibrated450k - Support Vector Machines (SVM) with linear kernels (LK) using the `LiblineaR`package
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r}
+# 1. Source utility/subfunctions (low level)
+source("subfunctions_XGBOOST.R")
+# Installs and loads the required packages caret, xgboost, Matrix, and doMC. 
+
+# <CRITICAL> Please note that on Mac OSX only a single-threaded version of `xgboost` will be installed when using the install.packages(“xgboost”) command. 
+# This is because the default Apple Clang compiler does not support OpenMP. To enable multi-threading on Mac OSX please consult the xgboost installation guide 
+# <https://xgboost.readthedocs.io/en/latest/build.html#osx-multithread>.
+
+# 2. Source train function (mid level)
+source("train_XGBOOST.R")
+# The XGboost workflow does not have additional "real" utility/subfunctions everything is integrated within the `trainXGBOOST_caret_tuner()`. 
+
+# 3. Source nestedcv function (high level)
+source("nestedcv_XGBOOST.R")
+```
+
+***
+
+## Run
+
+### Define parallel backend using `doMC` 
+
+**<NOTE>** Only load `library(doMC)` but **do not** define/register a back end. Simply provide the number of available *threads* in the `n.mc.cores = ` arguement of the `run_nestedcv_XGBOOST()` function. `caret` and `xgboost` will take care of that under the hood. They activate `openMP` (hyperthreading). 
+However, by default (when using `install.packages("xgboost")`) this is only available under Linux. R for MacOSX does not support (not compiled with) openMP out of the box and needs some additional effort to get it working.
+
+```{r}
+# 1. doMC  ----------------------------------------------------------------------------------------------------------------------
+library(doMC)
+```
+
+***
+
+### Load `y.RData` and `nfolds.RData` objects into the global environment (.GlobalEnv) 
+
+These are going to be fetched automatically from `.GlobalEnv` by the `run_nestedcv_SVM_LiblineaR()` function
+
+```{r}
+# Load needed data objects ---------------------------------------------------------------------------------------------------------------------
+
+# Local path if "./data" folder is in the working directory
+load("./data/y.RData")
+load("./data/nfolds.RData")
+
+# Suggested path in `rocker` (docker) container for R 
+# load("/home/rstudio/data/y.RData")
+# load("/home/rstudio/data/nfolds.RData")
+```
+
+***
+
+### Function call `run_nestedcv_XGBOOST()` 
+
+Default >> `y.. = NULL`, `betas.. = NULL` reading `betas.K.k.RData` objects from folder path `"... /data/betas.train.test.10k.filtered/"`
+
+See also **Figure 1., steps 7 - 10 | Internal validation**.
+
+#### `run_nestedcv_XGBOOST` - hyperparameter tuned `XGboost` using `caret` and built-in xgboost functionalities within the integrated nested CV scheme 
+
+```{r}
+# Run time:  ~130-160 min/(sub)fold with nCV = 3 | Full run time for fold 1.0 - 5.5 @ 72 cores c5n AWS ~ 11.5h
+
+Sys.time() 
+run_nestedcv_XGBOOST(y.. = NULL, 
+                     betas.. = NULL, 
+                     path.betas.var.filtered = "/home/rstudio/data/betas.train.test.10k.filtered/",
+                     fname.betas.p.varfilt = "betas",
+                     subset.CpGs.1k = F, 
+                     n.cv.folds = 5, 
+                     nfolds..= NULL,   
+                     K.start = 1, k.start = 0,
+                     K.stop = NULL, k.stop = NULL,
+                     n.CV. = 3, n.rep. = 1, # caret nested tuning
+                     max_depth = 6, 
+                     eta = c(0.1, 0.3), 
+                     gamma = c(0, 0.01),
+                     colsample_bytree = c(0.01, 0.02, 0.05, 0.2), 
+                     subsample = 1, 
+                     min.chwght = 1,
+                     nrounds = 100,        
+                     early_stopping_rounds = 50,
+                     n.mc.cores = 72, # e.g. AWS EC2 instance: c5n.18xlarge 72vCPU 
+                     seed = 1234, 
+                     out.path = "XGBOOST", 
+                     out.fname = "CVfold")
+Sys.time()
+```
+

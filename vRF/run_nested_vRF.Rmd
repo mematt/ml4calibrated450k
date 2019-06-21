@@ -1,0 +1,105 @@
+---
+title: "run-nested-vRF-ml4calibrated450k"
+author: "mematt"
+date: "4/18/2019"
+output: 
+  html_document: 
+    toc: yes
+    toc_depth: 4
+---
+
+# ml4calibrated450k - vanilla RF (vRF)
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r}
+# 1. Source utility/subfunctions (low level)
+source("subfunctions_vRF")
+
+# 2. Source train function (mid level)
+source("train_vRF.R")
+
+# 3. Source nestedcv function (high level)
+source("nestedcv_vRF.R")
+
+# 4. optional - for performance evaluation
+# the required evaluation metrics (BS, ME, LL, AUC) needed for performance evaluation
+source("evaluation_metrics.R")
+```
+
+***
+
+## Run
+
+### Define parallel backend using `doMC` 
+
+```{r}
+# Register parallel backend ---------------------------------------------------------------------------------------------------------------------------------------
+
+# 1. doMC  ----------------------------------------------------------------------------------------------------------------------
+library(doMC)
+
+# Detect cores(/threads)
+n_threads <- cores <- detectCores()-2 # leave 2 threads for OS
+# Note that you can register a different parallel backend later, or deregister doMC by registering the sequential backend by calling the `registerDoSEQ()` function
+registerDoMC(cores)
+#registerDoMC(cores = n_threads)
+getDoParVersion()    # "1.3.5"
+getDoParWorkers()    # 
+getDoParRegistered() # TRUE
+#registerDoSEQ()     # switch back to sequential (single core) # if using doMC backend 
+
+
+# Test parallel backend if it is running/functioning - by Hadley Wickham - AdvR p.374. -------------------------------------------
+my_pause <- function(i){
+  function(x) Sys.sleep(i)
+}
+
+system.time(lapply(1:10, my_pause(0.25)))
+#   user  system elapsed 
+#  0.008   0.000   2.502
+system.time(mclapply(1:10, my_pause(0.25), mc.cores = cores)) # 10
+#   user  system elapsed 
+#  0.004   0.272   0.269
+```
+
+***
+
+### Load `y.RData` and `nfolds.RData` objects into the global environment (.GlobalEnv) 
+
+These are going to be fetched automatically from `.GlobalEnv` by the `run_nestedcv_vRF()` function
+
+```{r}
+# Load needed data objects ---------------------------------------------------------------------------------------------------------------------------------------
+
+# Local path if "./data" folder is in the working directory
+load("./data/y.RData")
+load("./data/nfolds.RData")
+
+# Suggested path in `rocker` (docker) container for R 
+# load("/home/rstudio/data/y.RData")
+# load("/home/rstudio/data/nfolds.RData")
+```
+
+***
+
+### Function call `run_nestedcv_vRF()` with default settings $ntrees = 500, p = 200, mtry = sqrt(10000)$
+
+#### Default >> `y.. = NULL`, `betas.. = NULL` reading `betas.K.k.RData` objects from folder path `"... /data/betas.train.test.10k.filtered/"`
+
+See also **Figure 1., steps 7 - 10 | Internal validation**.
+
+```{r}
+# Run the function that performs the task - with default settings
+
+# RUN TIME: overall ~38 mins ;  ~ 1 min - 1 min 45s / (sub)fold  | nCV = 5 @ 10 threads i9 rMBP 15" (2018)
+Sys.time()
+run_nestedcv_vRF(path.betas.var.filtered = "/home/rstudio/data/betas.train.test.10k.filtered/", 
+                 fname.betas.p.varfilt = "betas",
+                 subset.CpGs.1k = F, 
+                 cores = n_threads)
+Sys.time()
+```
+

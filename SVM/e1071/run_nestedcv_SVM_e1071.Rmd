@@ -1,0 +1,113 @@
+---
+title: "run-nested-SVM-e1071-ml4calibrated450k"
+author: "mematt"
+date: "4/27/2019"
+output: 
+  html_document: 
+    toc: yes
+    toc_depth: 4
+---
+
+# ml4calibrated450k - Support Vector Machines (SVM) linear kernels (LK) using `e1071` package
+
+## Source dependencies: libraries, scripts and functions
+
+Please make sure that the sourced scripts are in the same folder.
+
+```{r}
+# 1. Source utility/subfunctions (low level)
+# required libraries are loaded or installed if needed
+source("subfunctions_SVM_e1071.R")
+
+# 2. Source train function (mid level)
+source("train_SVM_e1071.R")
+
+# 3. Source nestedcv function (high level)
+source("nestedcv_SVM_e1071.R")
+```
+
+***
+
+## Run
+
+### Define parallel backend using `doMC` 
+
+```{r}
+# Register parallel backend ---------------------------------------------------------------------------------------------------------------------------------------
+
+# 1. doMC  ----------------------------------------------------------------------------------------------------------------------
+library(doMC)
+# <Note> that you can register a different parallel backend later, or deregister doMC by registering the sequential backend by calling the `registerDoSEQ()` function
+
+# Detect cores(/threads)
+n_threads <- cores <- detectCores()-1 # leave 1 thread for the OS
+#cores <- 16         # AWS64 - caret 16 * rfp(4)
+registerDoMC(cores)
+#registerDoMC(cores = n_threads)
+# Check backend
+getDoParVersion()    # "1.3.5"
+getDoParWorkers()    # 
+getDoParRegistered() # TRUE
+#registerDoSEQ()
+
+
+# Test parallel backend if it is running/functioning - by Hadley Wickham - AdvR p.374. ---------------------------------------------
+my_pause <- function(i){
+  function(x) Sys.sleep(i)
+}
+
+system.time(lapply(1:10, my_pause(0.25)))
+#   user  system elapsed 
+#  0.008   0.000   2.502
+system.time(mclapply(1:10, my_pause(0.25), mc.cores = cores)) # 64
+#   user  system elapsed 
+#  0.004   0.272   0.269
+```
+
+***
+
+### Load `y.RData` and `nfolds.RData` objects into the global environment (.GlobalEnv) 
+
+These are going to be fetched automatically from `.GlobalEnv` by the `run_nestedcv_tunedRF()` function
+
+```{r}
+# Load needed data objects ---------------------------------------------------------------------------------------------------------------------------------------
+
+# Local path if "./data" folder is in the working directory
+load("./data/y.RData")
+load("./data/nfolds.RData")
+
+# Suggested path in `rocker` (docker) container for R 
+# load("/home/rstudio/data/y.RData")
+# load("/home/rstudio/data/nfolds.RData")
+```
+
+***
+
+### Function call `run_nestedcv_SVM_e1071()` 
+
+#### Default >> `y.. = NULL`, `betas.. = NULL` reading `betas.K.k.RData` objects from folder path `"... /data/betas.train.test.10k.filtered/"`
+
+See also **Figure 1., steps 7 - 10 | Internal validation**.
+
+```{r}
+# Run time:  ~ 50-70 min / (sub)fold  @ 11 threads @ Intel Core i7 6850k 
+Sys.time() 
+run_nestedcv_SVM_e1071(y.. = NULL, 
+                       betas.. = NULL, 
+                       path.betas.var.filtered = "/home/rstudio/data/betas.train.test.10k.filtered/",
+                       fname.betas.p.varfilt = "betas",
+                       subset.CpGs.1k = F, 
+                       n.cv.folds = 5, 
+                       nfolds.. = NULL,
+                       K.start = 1, k.start = 0,
+                       K.stop = NULL, k.stop = NULL, 
+                       n.CV. = 5,  # extra nested tuning in training loop
+                       C.base = 10, C.min = -3, C.max = 1,
+                       n.mc.cores = n_threads,   
+                       seed = 1234, 
+                       out.path = "SVM-e1071-10k", 
+                       out.fname = "CVfold")
+Sys.time()
+```
+
