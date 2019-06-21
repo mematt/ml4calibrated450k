@@ -178,7 +178,9 @@ load("nfolds.RData")
 # it can be generated using the `makefolds.R` script.
 # the nested 5 x 5-fold CV for internal validation.
 ```
-  
+
+***
+
 ### 4. Setup and import pre-requisite R packages.
 
 These steps are also embedded into the `utility/subfunction.R` and integrative R-mardown (e.g. `run_nestedcv_tRF.md`) files.
@@ -195,6 +197,8 @@ library(caret)
 # Consider leaving 1 thread for the operating system.
 cores <- detectCores()-1 
 ```
+
+***
 
 ### 5. Run R scripts necessary for tuning the RF classifier | Steps 7-10
 
@@ -231,7 +235,7 @@ source("nestedcv_tunedRF.R")
 + the function `run_nestedcv_tunedRF()` that integrates the (1.) **sub-** and (2.) **training functions** to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
 + It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively.
 
-***
+
 4. Open and run the R markdown file (`run_nestedcv_tRF.Rmd`) that contains code chuncks to perform all the above listed tasks 1.-3. to train and tune the RF classifier.
 
 ```{r}
@@ -346,8 +350,6 @@ Use a comprehensive panel of performance metrics:
 + Overall prediction performance - strictly proper scoring rules for evaluating the difference between observed class and predicted class probabilities:  
     + Brier score (BS)
     + multiclass log loss (LL)
-    
-***
 
 ```{r}
 # Source the script for complete performance evaluation of tRF
@@ -383,8 +385,6 @@ performance_evaluator(load.path.w.name. = "./tRF/MR-calibrated/probsCVfold.brier
 # Timing < 1 min
 performance_evaluator(name.of.obj.to.load = "scores")
 ```
-
-***
 
 The code snippet below generates (in < 4 min) the complete performance evaluation of all tRF algorithms (3 tRF<sub>BS | ME | LL</sub> x 3 [calibrator <sub>LR | FLR | MR</sub>] x 4 [metrics<sub>ME | AUC | BS | LL</sub>]), see also (*Fig. 1, step 14* & *Table 2*). 
 
