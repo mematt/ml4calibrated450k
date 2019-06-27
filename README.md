@@ -20,11 +20,18 @@ https://www.nature.com/articles/nature26000.
 
 The corresponding Github repository (https://github.com/mwsill/mnp_training) presents the implementations of the MR-calibrated (untuned) RF classifier and all steps (i.e. downloading, pre-processing and filtering) required to generate the benchmarking data set `MNPbetas10Kvar.RData` (see *Fig. 1 - Part 1* in the submitted paper). 
 
-The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381).
+The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381). CpG probes were normalized but not batch adjusted. The preprocessing steps can be easily performed using R scripts (`preprocessing.R`) provided in the above repository (https://github.com/mwsill/mnp_training).
 
-The benchmarking data set was based on the 10,000 most variable CpG probes and it can be easily generated using R scripts provided in the above repository (https://github.com/mwsill/mnp_training).   
+The benchmarking was based on the subset of 10,000 most variable CpG probes to limit computation burden on multicore CPUs. Nevertheless, each supervised classifier had to fit over 2.5 billion (10<sup>4</sup> × 2801 × 91) data points. In order to prevent information leakage, this unsupervised variance filtering was performed on the respective training set for each outer- and innerfold while the corresponding test- or calibration sets were subsetted accordingly.  
 
-A smaller subset of the reference DNA methylation cohort data containing only the 1000 most variable CpG probes (`betas1000.RData`) is provided for direct download in this repository. The true class label vector `y.RData` is also directly downloadable from here. 
+These variance filtered training-test set pairs were saved in separate .RData files (`betas.K.k.RData`; n=30; 1.0 – 5.5) and provided the basis for all downstream comparative ML-wokflow analyses. These can be generated either  
+
++ by the `subfunction_load_subset_filter_match_betasKk.R` script in the `/data/` folder using the `subfunc_load_betashdf5_subset_filter_match_save_betasKk()` function.  
++ or are readily available to direct download (*~5.3Gb*) from our Dropbox folder `betas.train.test.10k.filtered` at <http://bit.ly/2vBg8yc>.
+
+Also, the true class label vector `y.RData` for the reference cohort (n=2801 cases) is available in the `/data/` folder. 
+
+To speed up local ML evaluation, the subset using only the 1000 most variable CpG probes of the reference DNA methylation cohort data (from each `betas.K.k.RData` fold) can be triggered by setting the arguement `subset.CpGs.1k = T` in each `run_nestedcv_*<ML-classifier>*()` function.
 
 This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in the submitted paper) to develop ML-workflows for estimating class probabilities for precision cancer diagnostics.
 
@@ -178,9 +185,7 @@ load("nfolds.RData")
 # it can be generated using the `makefolds.R` script.
 # the nested 5 x 5-fold CV for internal validation.
 ```
-
-***
-
+  
 ### 4. Setup and import pre-requisite R packages.
 
 These steps are also embedded into the `utility/subfunction.R` and integrative R-mardown (e.g. `run_nestedcv_tRF.md`) files.
@@ -197,8 +202,6 @@ library(caret)
 # Consider leaving 1 thread for the operating system.
 cores <- detectCores()-1 
 ```
-
-***
 
 ### 5. Run R scripts necessary for tuning the RF classifier | Steps 7-10
 
@@ -235,7 +238,7 @@ source("nestedcv_tunedRF.R")
 + the function `run_nestedcv_tunedRF()` that integrates the (1.) **sub-** and (2.) **training functions** to perform the complete internal validation within the 5 x 5-fold nested CV scheme. 
 + It creates an output folder (by default `./tRF/`) and exports the resulting variables (hyperparemeter settings and raw classifier scores) into a `CVfold.1.0.RData`file for each (sub)fold, respectively.
 
-
+***
 4. Open and run the R markdown file (`run_nestedcv_tRF.Rmd`) that contains code chuncks to perform all the above listed tasks 1.-3. to train and tune the RF classifier.
 
 ```{r}
@@ -350,6 +353,8 @@ Use a comprehensive panel of performance metrics:
 + Overall prediction performance - strictly proper scoring rules for evaluating the difference between observed class and predicted class probabilities:  
     + Brier score (BS)
     + multiclass log loss (LL)
+    
+***
 
 ```{r}
 # Source the script for complete performance evaluation of tRF
@@ -385,6 +390,8 @@ performance_evaluator(load.path.w.name. = "./tRF/MR-calibrated/probsCVfold.brier
 # Timing < 1 min
 performance_evaluator(name.of.obj.to.load = "scores")
 ```
+
+***
 
 The code snippet below generates (in < 4 min) the complete performance evaluation of all tRF algorithms (3 tRF<sub>BS | ME | LL</sub> x 3 [calibrator <sub>LR | FLR | MR</sub>] x 4 [metrics<sub>ME | AUC | BS | LL</sub>]), see also (*Fig. 1, step 14* & *Table 2*). 
 
