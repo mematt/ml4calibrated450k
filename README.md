@@ -78,7 +78,7 @@ All algorithms were implementated and evaluated within:
 We also provide scripts for evaluation (e.g. `evaluation_metrics.R` and `performance_evaluator.R`) such as:  
 
 + Misclassification error (ME)
-+ Multiclass AUCH as published by Hand and Till (2001)
++ Multiclass AUC as published by Hand and Till (2001)
     + **R package**: `HandTill2001`
 + Brier score (BS) 
     + **R script**: `brier.R`
@@ -93,7 +93,7 @@ Because the respective R package for each investigated ML-classifier algorithm h
 1. **Low level:** scripts of utility/subfunctions (e.g. `subfunction_tunedRF.R`) are invoked to extract optimal hyperparameter settings from the respective predictor algorithm and/or ML-framework like the `caret` package.  
 2. **Mid level:** scripts (e.g. `train_tunedRF.R`) containing the train function (e.g. `trainRF_caret_custom_tuner()`) that perform hyperparameter tuning using the corresponding subfunctions.  
 3. **High level:**  in these scripts (e.g. `nestedcv_tunedRF.R`) the respective train function is embedded within the nested cross-validation scheme.  
-4. **Integrative Run files:** Finally, we provide a R-markdown files (e.g. `run_nestedcv_tRF.Rmd`) for each ML-algorithm to perform the whole internal validation processes integrating the **low, mid and high level** scripts.  
+4. **Integrative Run files:** Finally, we provide a R-markdown file (e.g. `run_nestedcv_tRF.Rmd`) for each ML-algorithm to perform the whole internal validation processes integrating the **low, mid and high level** scripts.  
 5. Consequently, dedicated calibrator (e.g. `calibration_MR.R`) and performance evaluator (e.g. `performance_evaluator.R`) functions might be applied separately to their outputs.  
 
 ***
@@ -154,7 +154,7 @@ For Boost library, which is required for the `Rgtsvm` package, see the user guid
 
 Below, we present the steps needed to perform hyperparameter tuning for the RF classifier including its calibration with MR (tRF<sub>BS | ME | LL</sub> + MR) and its final performance evaluation.  
 
-*Codes for the remaining ML-classifiers and calibration algorithms will be uploaded when the review process is finished.*
+*Codes for the remaining ML-classifiers and calibration algorithms are also provided in the respective folder.*
 
 ### 3. Load data sets & objects | Steps 1 - 6
 
