@@ -2,7 +2,7 @@
 # ml4calibrated450k
 
 ## Overview 
-This is a companion repository for the article *"Comparative analysis of machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data"* submitted to Nature Protocols (https://www.nature.com/nprot/).
+This is a companion repository for the article *"Machine learning workflows to estimate class probabilities for precision cancer diagnostics on DNA methylation microarray data"* (to appear) in Nature Protocols (https://www.nature.com/nprot/ ; DOI 10.1038/s41596-019-0251-6).
 
 Our comaprisons included four well-established machine learning (ML) algorithms: random forests (RF), elastic net penalized multinomial logistic regression (ELNET), support vector machines (SVM) and boosted trees (XGBOOST).
 
