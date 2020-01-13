@@ -29,7 +29,7 @@ Also, the true class label vector `y.RData` for the reference cohort (n=2801 cas
 
 To speed up local ML evaluation, the subset using only the 1000 most variable CpG probes of the reference DNA methylation cohort data (from each `betas.K.k.RData` fold) can be triggered by setting the arguement `subset.CpGs.1k = T` in each `run_nestedcv_*<ML-classifier>*()` function.
 
-This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in the submitted paper) to develop ML-workflows for estimating class probabilities for precision cancer diagnostics.
+This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in the [paper](https://www.nature.com/articles/s41596-019-0251-6)) to develop ML-workflows for estimating class probabilities for precision cancer diagnostics.
 
 ***
 
