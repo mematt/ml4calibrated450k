@@ -23,7 +23,7 @@ The benchmarking was based on the subset of 10,000 most variable CpG probes to l
 These variance filtered training-test set pairs were saved in separate .RData files (`betas.K.k.RData`; n=30; 1.0 – 5.5) and provided the basis for all downstream comparative ML-wokflow analyses. These can be generated either  
 
 + by the `subfunction_load_subset_filter_match_betasKk.R` script in the `/data/` folder using the `subfunc_load_betashdf5_subset_filter_match_save_betasKk()` function.  
-+ or are readily available to direct download (*~5.3Gb*) from our Dropbox folder `betas.train.test.10k.filtered` at <http://bit.ly/2vBg8yc>.
++ or are readily available to direct download (*~5.3Gb*) from our Dropbox folder `betas.train.test.10k.filtered` at <https://www.dropbox.com/sh/wkhau4ymwjqlivi/AABwoTJwArV-5sV9CgV8S0PUa?dl=0>.
 
 Also, the true class label vector `y.RData` for the reference cohort (n=2801 cases) is available in the `/data/` folder. 
 
