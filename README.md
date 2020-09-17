@@ -8,19 +8,19 @@ Our comaprisons included four well-established machine learning (ML) algorithms:
 
 For calibration, we used i) Platt scaling implemented by logistic regression (LR), Firth's penalized LR; and ii) ridge penalized multinomial regression (MR). 
 
-All algorithms were compared on an uqinque data set of brain tumor DNA methylation reference cohort (n=2801 cases belonging to 91 classes) published in:
+All algorithms were compared on an unique data set of brain tumor DNA methylation reference cohort (n=2801 cases belonging to 91 classes) published in:
 
 > Capper, D., Jones, D. T. W., Sill, M. and et al. (2018a). 
 *"DNA methylation-based classification of central nervous system tumours." Nature, 555, 469 ;* 
 https://www.nature.com/articles/nature26000. 
 
-The corresponding Github repository (https://github.com/mwsill/mnp_training) presents the implementations of the MR-calibrated (untuned/vanilla) RF classifier and all steps (i.e. downloading, pre-processing) required to generate the primary benchmarking data set (see *Fig. 1 - Part 1* in the submitted paper). 
+The corresponding Github repository (https://github.com/mwsill/mnp_training) presents the implementations of the MR-calibrated (untuned/vanilla) RF classifier and all steps (i.e. downloading, pre-processing) required to generate the primary benchmarking data set (see *Fig. 1 - Part 1* in the paper). 
 
-The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number GSE109381 (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381). CpG probes were normalized but not batch adjusted. The preprocessing steps can be easily performed using R scripts (`preprocessing.R`) provided in the above repository (https://github.com/mwsill/mnp_training).
+The 450k DNA methylation array data of the reference cohort is available in the Gene Expression Omnibus under the accession number `GSE109381` (https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109381). CpG probes were normalized but not batch adjusted. The preprocessing steps can be easily performed using R scripts (`preprocessing.R`) provided in the above repository (https://github.com/mwsill/mnp_training).
 
 The benchmarking was based on the subset of 10,000 most variable CpG probes to limit computation burden on multicore CPUs. Nevertheless, each supervised classifier had to fit over 2.5 billion (10<sup>4</sup> × 2801 × 91) data points. In order to prevent information leakage, this unsupervised variance filtering was performed on the respective training set for each outer- and innerfold while the corresponding test- or calibration sets were subsetted accordingly.  
 
-These variance filtered training-test set pairs were saved in separate .RData files (`betas.K.k.RData`; n=30; 1.0 – 5.5) and provided the basis for all downstream comparative ML-wokflow analyses. These can be generated either  
+These variance filtered training-test set pairs were saved in separate .RData files (`betas.K.k.RData`; n=30; 1.0 – 5.5 CV folds) and provided the basis for all downstream comparative ML-wokflow analyses. These can be generated either  
 
 + by the `subfunction_load_subset_filter_match_betasKk.R` script in the `/data/` folder using the `subfunc_load_betashdf5_subset_filter_match_save_betasKk()` function.  
 + or are readily available to direct download (*~5.3Gb*) from our Dropbox folder `betas.train.test.10k.filtered` at <https://www.dropbox.com/sh/wkhau4ymwjqlivi/AABwoTJwArV-5sV9CgV8S0PUa?dl=0>.
@@ -29,7 +29,7 @@ Also, the true class label vector `y.RData` for the reference cohort (n=2801 cas
 
 To speed up local ML evaluation, the subset using only the 1000 most variable CpG probes of the reference DNA methylation cohort data (from each `betas.K.k.RData` fold) can be triggered by setting the arguement `subset.CpGs.1k = T` in each `run_nestedcv_*<ML-classifier>*()` function.
 
-This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in the [paper](https://www.nature.com/articles/s41596-019-0251-6)) to develop ML-workflows for estimating class probabilities for precision cancer diagnostics.
+This repository focuses on the internal validation and benchmarking of the combination of these ML- and calibration algorithms (see *Figure 1 - Part 2* in [Maros et al 2020](https://www.nature.com/articles/s41596-019-0251-6)) to develop ML-workflows for estimating class probabilities for precision cancer diagnostics.
 
 ***
 
