@@ -24,7 +24,7 @@ These variance filtered training-test set pairs were saved in separate .RData fi
 
 + by the `subfunction_load_subset_filter_match_betasKk.R` script in the `/data/` folder using the `subfunc_load_betashdf5_subset_filter_match_save_betasKk()` function.  
 + or are readily available to direct download (*~5.3Gb*) from our Dropbox folder `betas.train.test.10k.filtered` at <https://www.dropbox.com/sh/wkhau4ymwjqlivi/AABwoTJwArV-5sV9CgV8S0PUa?dl=0>. 
-+ Unfortunately, the link (http://bit.ly/2vBg8yc) in the paper got deactivated. Please use the above link to download the dataset.
++ Unfortunately, the link (http://bit.ly/2vBg8yc) in the paper got deactivated. Please use the above link to download the dataset or the recently updated link (https://bit.ly/2vBg8yc_2022).  
 
 Also, the true class label vector `y.RData` for the reference cohort (n=2801 cases) is available in the `/data/` folder. 
 
